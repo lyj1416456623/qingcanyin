@@ -1,0 +1,18 @@
+/*This is Index/paymentcode css file!*/
+.tCode{
+	width:100%;
+	text-align: center;
+	margin-top:1em;
+}
+.tCode img{
+	width:80%;
+}
+.erCode img{
+	width:60%;
+}
+.content p{
+	text-align: center;
+	margin-top:2em;
+	font-size:.8em;
+	color:#a9a9a9;
+}

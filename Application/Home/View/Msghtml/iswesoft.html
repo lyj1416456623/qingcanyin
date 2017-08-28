@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>欢迎使用{:C('NICK_NAME')}小程序</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<include file="Public:script" />
+</head>
+<body>
+	<div class="weui-msg">
+		<div class="weui-msg__icon-area">
+			<img alt="" src="data:image/jpeg;base64,{$img}" style="width:200px;height:auto;">
+		</div>
+		<div class="weui-msg__text-area">
+			<h2 class="weui-msg__title">HI,朋友！</h2>
+			<p class="weui-msg__desc">
+				{:C('SIGNATURE')}
+			</p>
+			<p class="weui-msg__desc">
+				这是“{:C('NICK_NAME')}”小程序，<php> if(is_weixin()) {</php>长按识别上面的二维码开始体验！<php>} else { </php>
+				请使用微信扫描上方二维码快速体验！
+				<php>} </php>
+			</p>
+		</div>
+		<div class="weui-msg__extra-area">
+			<div class="weui-footer">
+				<p class="weui-footer__links">
+					<a href="http://www.xinyisoft.cn" class="weui-footer__link">轻餐饮提供技术和数据支持</a>
+				</p>
+				<p class="weui-footer__text">Copyright © 2008-2016
+					{:C('DOMAIN_ROOT')}</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

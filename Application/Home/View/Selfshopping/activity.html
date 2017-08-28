@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('一分钱领水')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、自助点餐">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var returnwx = "{$_GET['returnwx']}";
+		var code = "{$_GET['code']}";
+		var appid = "{$_GET['appid']}";
+		var state = "{$_GET['state']}";
+		var storeid = "{$_GET['storeid']}";
+		var activityid = "1";
+		console.log(activityid);
+	</script>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<img src="__PUBLIC__/images/icon/background.png" />
+				<div class="submit-button">
+					<img src="__PUBLIC__/images/icon/bj.png" v-if="number > 0" v-on:click="jump(url)" />
+					<img src="__PUBLIC__/images/icon/bjh.png" v-else />
+					<p>{:L('您今日还可以领取')}<span>{{number}}</span>{:L('瓶')}</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

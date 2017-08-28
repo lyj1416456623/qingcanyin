@@ -1,0 +1,276 @@
+/*This is Selfshopping/index css file!*/
+.container{
+	width:100%;
+}
+.title{
+	position: fixed;
+	width:100%;
+	top:0;
+	left:0;
+	border-bottom:1px solid #eee;
+	margin-top:0;
+}
+.left{
+ 	width: 26%;
+    height: auto;
+    background: #fff;
+    color: #666666;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    left: 0;
+    top: 64px;
+    bottom: 3.2em;
+    z-index:1;
+}
+.right{
+	overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    width: 74%;
+    background: white;
+    right: 0;
+    top: 64px;
+    bottom: 3.2em;
+    z-index:1;
+    border-left:1px solid #eee;
+}
+.left li{
+	list-style:none;
+	width:70%;
+	padding:.5em 15%;
+	border-bottom:1px solid #eee;
+	position:relative;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	display:-webkit-box; 
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2; 
+}
+.left li img{
+	width:1em;
+	height:1em;
+	vertical-align: middle;
+	margin-right:.2em;
+}
+.goods{
+	height:1.5em;
+	line-height: 1.5em;
+	position: absolute;
+	right:0;
+	bottom:0;
+}
+.goods img{
+	width:1.5em;
+	float:left;
+}
+.goods span{
+	display: block;
+	width:1.5em;
+	text-align: center;
+	float:left;
+}
+.img{
+	width:100%;
+	height:12em;
+	border:1px solid #eee;
+	box-sizing: border-box;
+	background-position: center;
+	background-size:100% 100%;
+	background-repeat: no-repeat;
+}
+/*.img{
+	width:100%;
+	border:1px solid #eee;
+	background-position: center;
+	background-size:100%;
+	background-repeat: no-repeat;
+}
+.img img{
+	width:100%;
+}*/
+.goods input{
+	display: block;
+	width:1.5em;
+	height:2em;
+	text-align: center;
+	float:left;
+	border:none;
+}
+.footer{
+	width:100%;
+	height:3.2em;
+	position:fixed;
+	bottom:0;
+	left:0;
+	z-index:121;
+	background:#fff;
+	border-top:1px solid #eee;
+}
+.cart{
+	width:100%;
+	position: fixed;
+	left:0;
+	bottom:3.2em;
+	background:#fff;
+	z-index:2;
+}
+.footer img{
+	width:2.5em;
+}
+.submit{
+	width:6em;
+	height:100%;
+	position:absolute;
+	right:0;
+	bottom:0;
+	background:#009900;
+	text-align: center;
+	line-height: 3.2em;
+	color:#fff;
+}
+.cart_list{
+	max-height:20em;
+	overflow-y: scroll;
+}
+.goodsCart_change .weui-cell:before{
+	border:none;
+}
+.goodsCart_change .weui-cell{
+	padding-top:0;
+	font-size:.8em;
+	color:#999;
+}
+.goodsCart{
+	position:relative;
+	border-top:1px solid #eee;
+}
+.cartgood{
+	top:50%;
+	right:1em;
+	margin-top:-.6em;
+}
+.cart-title{
+	max-width:55%;
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	float: left;
+}
+.clear:before{
+	border:0;
+}
+.common,.comm{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background:rgba(0,0,0,.5);
+	z-index:2;
+}
+.comm{
+	z-index:122;	
+}
+#iosDialog1 .weui-cells{
+	max-height:150px;
+	overflow-y:scroll;
+}
+.dialogImg{
+	width:100%;
+	height:13em;
+	display:block;
+	border-bottom:1px solid #eee;
+	background-size:100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.weui-gallery{
+	display: block;
+}
+.weui-gallery__img{
+	position:fixed;
+	z-index:122;
+	bottom:0;	
+}
+/*打包*/
+.pack{
+	padding:3px;
+	background:#ffc801;
+	color:#fff;
+	font-size:.6em;
+	margin-left:5px;
+	border-radius: 5px;
+	float:left;
+}
+/*多图轮播*/
+.close{
+	width:25px;
+	height:25px;
+	position: absolute;
+	top:10px;
+	right:10px;
+	z-index:133;
+	background-image: url(/Public/images/icon/close.png);
+	background-size:100%;
+}
+.slider{
+	width:100%;
+	height:18em;
+	top:50%;
+	margin-top:-9em;
+}
+.flexslider{
+	width:100%;
+	height:100%;
+	overflow: hidden;
+	position: relative;
+}
+.mask{
+	width:30%;
+	height:30%;
+	background-image: url(/Public/images/icon/correct.png);
+	background-size:cover;
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:1;
+}
+.flexslider ul{
+	width:400%;
+	height:100%;
+}
+.flexslider ul li{
+	float:left;
+	list-style: none;
+	width:25%;
+	height:18em;
+}
+.flexslider ul li img{
+	width:100%;
+	height:100%;
+}
+.js-slidernav{
+	width:2em;
+	position: absolute;
+	left:50%;
+	bottom:.5em;
+	z-index: 1;
+	margin-left:-1em;
+}
+.js-slidernav li{
+	width:8px;
+	height:8px;
+	background:rgba(0,0,0,.3);
+	margin-right:.3em;
+	list-style: none;
+	float:left;
+	border-radius:50%;
+}
+.js-slidernav .flex-active{
+	background:#000;
+}

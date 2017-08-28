@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('我的券码')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、券码列表">
+		<include file="Public:script" />
+		<script type="text/javascript" src="__PUBLIC__/js/iscroll/demos/iscroll.js"></script> 
+	</head>
+	<body>
+		<div id="wrapper" v-cloak>
+			<!--弹窗-->
+			<div class="js_dialog" id="iosDialog2" v-if="errorText">
+			    <div class="weui-mask"></div>
+			    <div class="weui-dialog">
+			        <div class="weui-dialog__bd" style="padding:1.2em 20px .1em">{:L('信息异常')}</div>
+			        <div class="weui-dialog__ft">
+			            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="back">{:L('点击返回')}</a>
+			        </div>
+			    </div>
+			</div>
+			<div id="scroller">
+				<div id="pullDown" :class="pullDownclassName">
+					<span class="pullDownIcon"></span>
+					<span class="pullDownLabel">{{pullDownText}}</span>
+				</div>
+				<ul id="thelist">
+				<div class="page home js_show">
+					<div class="page__bd page__bd_spacing" style="padding:0 15px;">
+						<div class="page__bd">
+							<template v-for="item in List">
+						        <a class="weui-cells" :href="item.url">
+						            <div class="weui-cell" v-bind:style="item.styleobj">
+						                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+						                    <img :src="item.icon" style="width:50px;height:50px;display: block">
+						                </div>
+						                <div class="weui-cell__bd">
+						                    <p style="color:#fff">{{item.title}}</p>
+						                </div>
+						            </div>
+						            <div class="weui-cell weui-cell_access" style="font-size:.8em;border-bottom:1px solid #eee">
+						                <div class="weui-cell__bd">
+						                    <span style="vertical-align: middle;color:#555b69">{:L('有效期:')}{{item.endtime}}</span>
+						                </div>
+						                <div class="weui-cell__ft">{:L('查看')}</div>
+						            </div>
+						        </a>
+						        </br>
+					       </template>
+					    </div>
+					</div>
+				</div>
+			</ul>
+			<div id="pullUp" :class="pullDownclassName">
+				<span class="pullUpIcon"></span>
+				<span class="pullUpLabel">{{pullUpText}}</span>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

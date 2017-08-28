@@ -1,0 +1,104 @@
+/*This is Selfshopping/storeinfo css file!*/
+.container{
+	padding-bottom:3em;
+}
+.bgimage{
+	background-size:100% 100%;
+	-webkit-filter:blur(15px);
+	filter:blur(15px);
+	height:111px;
+}
+.xinyi{
+	position: absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	background:none;
+}
+.weui-cells:before{
+	border:none;
+}
+.weui-cells:after{
+	border:none;
+}
+.notice{
+	border-bottom:1px solid #e4e4e4;
+}
+.distance{
+	font-size:.5em;
+	margin-left:.5em;
+}
+.distance_img{
+	width:1em;
+	margin-left:.1em;
+}
+.icon_img img{
+	width:.8em;
+	margin-right:.5em;
+	margin-top:.3em;
+	float:left;
+}
+.icon_img:after{
+	content:".";        
+    display:block;        
+    height:0;        
+    clear:both;        
+    visibility:hidden; 
+}
+.dt_footer{
+	width:100%;
+	height:3em;
+	background:#1aac19;
+	text-align: center;
+	line-height:3em;
+	color:#fff;
+	position: fixed;
+	bottom:0;
+	left:0;
+	z-index:12;
+}
+.slider{
+	width:100%;
+	height:10em;
+	margin-top:1em;
+}
+.flexslider{
+	width:100%;
+	height:100%;
+	overflow: hidden;
+	position: relative;
+}
+.flexslider ul{
+	width:400%;
+	height:100%;
+}
+.flexslider ul li{
+	float:left;
+	list-style: none;
+	width:25%;
+	height:10em;
+}
+.flexslider ul li img{
+	width:100%;
+	height:100%;
+}
+.js-slidernav{
+	width:4em;
+	position: absolute;
+	left:50%;
+	bottom:.5em;
+	z-index: 1;
+	margin-left:-2em;
+}
+.js-slidernav li{
+	width:8px;
+	height:8px;
+	background:rgba(0,0,0,.3);
+	margin-right:.3em;
+	list-style: none;
+	float:left;
+	border-radius:50%;
+}
+.js-slidernav .flex-active{
+	background:#000;
+}

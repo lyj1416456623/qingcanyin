@@ -1,0 +1,71 @@
+/*This is Integralshop/exchange css file!*/
+.container{
+	padding-bottom:4.5em;
+}
+.slider{
+	width:100%;
+	height:14em;
+}
+.flexslider{
+	width:100%;
+	height:100%;
+	overflow: hidden;
+	position: relative;
+}
+.mask{
+	width:30%;
+	height:30%;
+	background-image: url(/Public/images/icon/correct.png);
+	background-size:cover;
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:1;
+}
+.flexslider ul{
+	width:400%;
+	height:100%;
+}
+.flexslider ul li{
+	float:left;
+	list-style: none;
+	width:25%;
+	height:14em;
+}
+.flexslider ul li img{
+	width:100%;
+	height:100%;
+}
+.js-slidernav{
+	width:4em;
+	position: absolute;
+	left:50%;
+	bottom:.5em;
+	z-index: 1;
+	margin-left:-2em;
+}
+.js-slidernav li{
+	width:8px;
+	height:8px;
+	background:rgba(0,0,0,.3);
+	margin-right:.3em;
+	list-style: none;
+	float:left;
+	border-radius:50%;
+}
+.js-slidernav .flex-active{
+	background:#000;
+}
+.footer{
+	padding:0 2%;
+	position: fixed;
+	left:0;
+	bottom:0;
+	width:96%;
+	height:4em;
+	z-index:12;
+	background:#fff;
+}
+.flex-direction-nav{
+	display:none;
+}

@@ -1,0 +1,57 @@
+/*This is Myorder/detail css file!*/
+.container{
+	padding-bottom:3em;
+}
+.weui-form-preview{
+	margin-bottom:0;
+}
+.weui-form-preview__bd{
+	font-size:1em;
+	color:#000;
+}
+.weui-form-preview__item{
+	margin-bottom:.5em
+}
+.goods{
+	width:50%;
+}
+.goodsCart_change .weui-cell:before{
+	border:none;
+}
+.goodsCart_change .weui-cell{
+	padding-top:0;
+	font-size:.8em;
+	color:#999;
+}
+.goodsCart{
+	width:100%;
+	position:relative;
+	border-top: 1px solid #eee;
+}
+.free_fee{
+	border-top:1px solid #eee;
+}
+.cartgood{
+	position: absolute;
+	top:20px;
+	left:60%;
+	margin-top:-.6em;
+	font-size:.8em;
+	color:#808080;
+}
+.goodsprice{
+	position: absolute;
+	top:20px;
+	right:4%;
+	margin-top:-.6em;
+	font-size:.8em;
+}
+.cart_list_border:before{
+	border:none;
+}
+.free_fee:before{
+	border:none;
+}
+.weui-cell__ft{
+	font-size:.8em;
+}

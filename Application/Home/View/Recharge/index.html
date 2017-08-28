@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('充值')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、充值">
+		<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="page input js_show" else>
+			    <div class="page__bd">
+			        <div class="weui-cells__title">{:L('请选择充值金额')}</div>
+			        <div class="weui-cells weui-cells_radio">
+			            <label class="weui-cell weui-check__label" v-for="list in List">
+			                <div class="weui-cell__bd">
+			                    <p>{{list.name}}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                    <input type="radio" class="weui-check" :value="list.value" name="price" :id="list.value"  :checked="list.checked">
+			                    <span class="weui-icon-checked"></span>
+			                </div>
+			            </label>
+			        </div>
+			        <div class="weui-btn-area">
+			            <a class="weui-btn weui-btn_primary" v-on:click="openpay" id="showTooltips">{:L('立即充值')}</a>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</body>
+</html>

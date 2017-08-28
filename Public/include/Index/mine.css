@@ -1,0 +1,36 @@
+/*This is Index/mine css file!*/
+body{
+	background:#f9f9f9!important;
+}
+.container{
+	width:100%;
+}
+.header{
+	width:100%;
+	height:10em;
+	text-align:center;
+}
+.header img{
+    width: 6em;
+    height: 6em;
+    border: 2px solid #efebeb;
+    border-radius: 50%;
+    margin-top:2em;
+}
+.weui-grids{
+	width:100%;
+	background:#fff;
+	margin-top: 1.17647059em;
+}
+.weui-grids:before{
+	border:none;
+}
+.weui-grid:before{
+	border:none;
+}
+.weui-grid:after{
+	border:none;
+}
+.weui-grids:after{
+	border:none;
+}

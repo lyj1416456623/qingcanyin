@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{:L('首页')}</title>
+<meta name="keywords" content="芯易科技、轻餐饮、订餐首页">
+<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+<include file="Public:script" />
+</head>
+<body>
+	<div id="body" v-cloak>
+		<div class="weui-loadmore" v-if="loading">
+			<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+		</div>
+		<div class="container" v-if="showContent" :style="headBgImage">
+			<div class="page__bd">
+				<div class="weui-cell" style="padding-top: 1em">
+					<div class="weui-cell__hd userImg" v-on:click="mine">
+						<img :src="userInfo.usericon" v-if="userInfo.usericon">
+						<img :src="usericon" v-else>
+					</div>
+					<div class="weui-cell__bd text_show" style="color: #fff">
+						
+					</div>
+					<div class="qcode" v-if="qrcode && qrcode.status" v-on:click="paymentcode">
+						<img :src="qrcode.icon" alt="" />
+						<p>{{qrcode.text}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="weui-grids nine">
+				<a :href="item.link" class="weui-grid" v-for="item in headItems">
+					<div class="weui-grid__icon">
+						<img :src="item.icon" alt="">
+					</div>
+					<p class="weui-grid__label">{{item.name}}</p>
+				</a> 
+			</div>
+			<div class="ad" v-if="guanggaodata.length>0">
+				<template v-for="item in guanggaodata">
+					<a :href="item.link" class="adBlock" :style="item.backgroundImage"></a>
+				</template>
+			</div>
+			<include file="Public:footer" />
+		</div>
+	</div>
+</body>
+</html>

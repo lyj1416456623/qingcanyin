@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('提交订单')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、提交订单">
+		<include file="Public:script" />
+		<script type="text/javascript">
+			var storeid = "{$_GET['storeid']}";
+		</script>
+	</head>
+	<body style="background:#f9f9f9">
+		<div id="body" v-cloak>
+			<div class="js_dialog" id="iosDialog1" v-if="error">
+	            <div class="weui-mask"></div>
+	            <div class="weui-dialog">
+	                <div class="weui-dialog__hd"><strong class="weui-dialog__title">{:L('下单失败')}</strong></div>
+	                <div class="weui-dialog__bd">{:L('您的账户余额不足')}</div>
+	                <div class="weui-dialog__ft">
+	                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" v-on:click="cancel">{:L('选择其他方式支付')}</a>
+	                    <a href="{:U('Recharge/index')}" class="weui-dialog__btn weui-dialog__btn_primary">{:L('立即去充值')}</a>
+	                </div>
+	            </div>
+	        </div>
+			<div class="container">
+				<div class="weui-cells__title">{:L('配送地址')}</div>
+				<div class="weui-cells">
+		            <div class="weui-cell">
+		                <div class="weui-cell__bd">
+		                    <p style="margin-bottom:.5em">{{address.address}}</p>
+		                    <p>
+		                    	<span>{{address.name}}</span>
+		                    	<span>{{address.phone}}</span>
+		                    </p>
+		                </div>
+		            </div>
+		      	</div>
+		      	<div class="weui-cells__title">{:L('配送时间')}</div>
+		      	<div class="weui-cells">
+		      		<a class="weui-cell weui-cell_access" href="javascript:;" id="showPicker" >
+		                <div class="weui-cell__bd">
+		                    <p>{:L('请选择送达时间')}</p>
+		                </div>
+		                <div class="weui-cell__ft">{{sendTime}}</div>
+		            </a>
+	           	</div>
+		      	<div class="weui-cells__title">{:L('支付方式')}</div>
+		       	<div class="weui-cells weui-cells_radio">
+		       		<template v-for="paytype in pay">
+			            <label class="weui-cell weui-check__label checkbox" :for="paytype.paytype">
+			                <div class="weui-cell__hd">
+			                	<img src="__PUBLIC__/images/icon/yue.png" alt="" style="width:20px;margin-right:5px;display:block" v-if="paytype.paytype=='0'">
+			                	<img src="__PUBLIC__/images/icon/wechat.png" alt="" style="width:20px;margin-right:5px;display:block" v-else>
+			                </div>
+			                <div class="weui-cell__bd">
+			                    <p v-if="useryue!=null&&paytype.paytype=='0'">{{paytype.payname}}<span style="font-size:.8em;color:#999999">{:L('(剩余')}{{useryue}}元)</span></p>
+			                    <p v-else>{{paytype.payname}}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                    <input type="radio" class="weui-check" name="radio" :id="paytype.paytype" :data-ptid="paytype.ptid" :data-id="paytype.member" :checked="paytype.checked" v-on:change="setChecked">
+			                    <span class="weui-icon-checked"></span>
+			                </div>
+			            </label>
+		            </template>
+		        </div>
+		        <div class="weui-cells">
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd"><img src="/Public/images/icon/wiasong1.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p style="font-size:.8em;color:#666">{:L('已经购买的商品')}</p>
+		                </div>
+		                <div class="weui-cell__ft"></div>
+		            </div>
+		        </div>
+	    		<div class="weui-cells cart_list_border" style="margin-top:0">
+	            	<div class="goodsCart" v-for="item in goodsList">
+	            		<!--套餐-->
+	            		<div class="goods">
+		            		<div class="weui-cell">
+				                <div class="weui-cell__hd"><img :src="item.goodspic" alt="" style="width:20px;height:20px;margin-right:5px;display:block"></div>
+				                <div class="weui-cell__bd" style="width:100%">
+				                    <p style="width:95%;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{item.goodsname}}</p>
+				                </div>
+				            </div>
+			            </div>
+			            <div class="cartgood">X{{item.goodsno}}</div>
+			            <div class="goodsprice">￥{{item.priceFormat}}</div>
+			            <!--小项-->
+			            <div class="goodsCart_change">
+			            	<template v-if="item.suitflag!=0" v-for="suit in item.suitflagdata">
+				            	<div class="weui-cell">└ 
+					                <div class="weui-cell__hd">
+					                	<img :src="suit.goodspic" alt="" style="width:10px;height:10px;margin-right:5px;display:block">
+					                </div>
+					                <div class="weui-cell__bd">
+					                    <p>{{suit.goodsname}} X {{suit.goodsno}} (+{{suit.addprice}}￥)</p>
+					                </div>
+					            </div>
+				            </template>
+				            <div class="weui-cell" v-if="item.remarks.length>0">
+				                <div class="weui-cell__bd">
+				                    <p>{:L('备注:')}
+				                    	<span v-for="remark in item.remarks">{{remark.remarks}} </span>
+				                    </p>
+				                </div>
+				            </div>
+			            </div>
+		           	</div>
+		            <div class="weui-cell free_fee">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('餐盒费')}</p>
+		                </div>
+		                <div class="weui-cell__ft" style="font-size:.8em;color:#000">￥{{packboxPrice}}</div>
+		            </div>
+		            <div class="weui-cell">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('配送费')}</p>
+		                </div>
+		                <div class="weui-cell__ft" style="font-size:.8em;color:#000">￥{{feePrice}}</div>
+		            </div>
+	          	</div>
+	          	<div class="weui-cells__title">{:L('订单签收成功后，请前往订单详情页领取电子发票')}</div>
+	          	<div class="footer">
+	          		<p>{:L('共￥')}{{totalPrice}}</p>
+	          		<div class="submit" v-on:click="submit">{:L('提交订单')}</div>
+	          	</div>
+			</div>
+		</div>
+	</body>
+</html>

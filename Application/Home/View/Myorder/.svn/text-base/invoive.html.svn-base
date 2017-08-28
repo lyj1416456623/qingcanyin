@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('领取发票')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、领取发票">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var orderno = "{$_GET['orderno']}";
+		var storeid = "{$_GET['storeid']}";
+		var addtime = "{$_GET['addtime']}";
+		var effective = "{$_GET['effective']}";
+	</script>
+	<body style="background:#f8f8f8">
+		<div id="body" v-cloak>
+			<div class="container">
+				<div class="page input js_show">
+					<div class="page__bd">
+						<div class="weui-cells">
+							<div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('订单编号')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{content.orderno}}</p>
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('发票金额')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{content.money}}</p>
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('发票抬头')}<span style="color:#ff0000">*</span></label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" type="text" v-model = "content.title" placeholder="请输入姓名/企业">
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('识别号')}<span style="color:#ff0000">*</span></label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" type="text" v-model = "content.identification" placeholder="请输入纳税人识别号">
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('收票邮箱')}<span style="color:#ff0000">*</span></label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" type="text" v-model = "content.email" placeholder="请输入有效邮箱接收电子发票">
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('手机号码')}<span style="color:#ff0000">*</span></label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" oninput="if(value.length>11)value=value.slice(0,11)" type="number" v-model = "content.phone" placeholder="请输入联系人手机号码">
+				                </div>
+				            </div>				            
+				        </div>
+				        <div class="weui-cells__title">{:L('2017年7月1日起，增值税普通发票必须包含统一社会信用代码')}</div>
+				        <div class="weui-cells">				            
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('银行开户行')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" type="text" v-model = "content.openingBank" placeholder="请输入银行开户行">
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('银行账号')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" type="number" v-model = "content.bankNumber" placeholder="请输入银行账号">
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('购方地址')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" type="text" v-model = "content.address" placeholder="请输入地址">
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('购方电话')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <input class="weui-input" type="text" v-model = "content.telephone" placeholder="请输入电话">
+				                </div>
+				            </div>
+				        </div>
+				        <div class="weui-cells__title">{:L('备注:')} 
+				        	<span style="color:#ff0000">*</span>
+				        	 {:L('为必填项，如需开专票请填全信息')}</div>
+				        <div class="weui-btn-area" v-on:click="location">
+				            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">{:L('点击领取')}</a>
+				        </div>
+			       	</div>
+		       	</div>
+			</div>
+		</div>
+	</body>
+</html>

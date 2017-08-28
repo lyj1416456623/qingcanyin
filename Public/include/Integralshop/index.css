@@ -1,0 +1,86 @@
+/*This is Integralshop/index css file!*/
+.Integral_item{
+	margin-bottom:.3em;
+}
+.Integral_item li{
+	width:47%;
+	float: left;
+	margin:.3em 1.5%;
+	list-style: none;
+	border:1px solid #eee;
+	box-sizing: border-box;
+	border-radius: .3em;
+	padding-bottom:.5em;
+}
+.Integral_item:after{
+	content:".";        
+    display:block;        
+    height:0;        
+    clear:both;        
+    visibility:hidden;     
+}
+.Integral_img{
+	width:90%;
+	height:8em;
+	margin:.5em auto;
+	border:1px solid #ddd;
+	background-image: url(/Public/images/icon/payfood.png);
+	background-size:cover;
+}
+.Integral_mask{
+	width:100%;
+	height:100%;
+	text-align: center;
+	line-height: 8em;
+	position:relative;
+}
+.Integral_mask img{
+	width:30%;
+	position: absolute;
+	top:0;
+	right:0;
+}
+.Integral_title,.Integral_rule{
+	margin-left:5%;
+}
+.integral_number{
+	float:left;
+	font-size:.5em;
+	width:70%;
+	overflow: hidden;
+	vertical-align: bottom;
+	word-break:keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	
+}
+.go_exchange{
+	float:right;
+	font-size:.5em;
+	margin-right:5%;
+	padding:.1em .3em;
+	background:#12B7F5;
+	color:#fff;
+	border-radius:.3em;
+}
+.black{
+	color:#000;
+	display:inline-block;
+	width:50%;
+	font-size:.8em;
+	overflow: hidden;
+	vertical-align: bottom;
+	word-break:keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.grey{
+	color:#999;
+}
+.yellow{
+	color:#E7B833;
+	font-size:.5em;
+	width:40%;
+	text-align: right;
+	display:inline-block;
+}

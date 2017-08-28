@@ -1,0 +1,4 @@
+/*This is Myorder/invoive css file!*/
+.weui-cells{
+	font-size:0.95em;
+}

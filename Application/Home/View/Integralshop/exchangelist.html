@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('积分兑换记录')}</title>
+		<meta name="keywords" content="芯易科技、轻餐饮、积分兑换记录">
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" style="background:#f8f8f8;position: absolute;top: 0;right: 0;left: 0;bottom:0;overflow: scroll;" v-cloak>
+			<div class="weui-loadmore" v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="page__bd" v-else>
+				<div class="weui-cells__title" style="padding:.3em 15px;margin:0">{:L('我的兑换记录')}</div>
+				<template v-for="item in exchangeList">
+			        <div class="weui-form-preview" >
+			        	<div class="weui-form-preview__hd">
+			                <label class="weui-form-preview__label">{:L('所用积分')}</label>
+			                <em class="weui-form-preview__value">{{item.integral}}{:L('积分')}</em>
+			            </div>
+			            <div class="weui-form-preview__bd">
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label">{:L('商品名称')}</label>
+			                    <span class="weui-form-preview__value">{{item.goodsname}}</span>
+			                </div>
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label">{:L('兑换时间')}</label>
+			                    <span class="weui-form-preview__value">{{item.ctime}}</span>
+			                </div>
+			                <template v-if="item.type!=1">
+				                <div class="weui-form-preview__item" >
+				                    <label class="weui-form-preview__label">券号</label>
+				                    <span class="weui-form-preview__value">{{item.couponcode}}</span>
+				                </div>
+				                <div class="weui-form-preview__item">
+				                    <label class="weui-form-preview__label">{:L('到期时间')}</label>
+				                    <span class="weui-form-preview__value">{{item.tdate}}</span>
+				                </div>
+			                </template>
+			                <template v-if="item.type==1">
+				                <div class="weui-form-preview__item">
+				                    <label class="weui-form-preview__label">{:L('姓名')}</label>
+				                    <span class="weui-form-preview__value">{{item.uname}}</span>
+				                </div>
+				                <div class="weui-form-preview__item">
+				                    <label class="weui-form-preview__label">{:L('联系方式')}</label>
+				                    <span class="weui-form-preview__value">{{item.phone}}</span>
+				                </div>
+				                <div class="weui-form-preview__item">
+				                    <label class="weui-form-preview__label">{:L('地址')}</label>
+				                    <span class="weui-form-preview__value">{{item.address}}</span>
+				                </div>
+			                </template>
+			            </div>
+			            <div class="weui-form-preview__ft">
+			                <a class="weui-form-preview__btn weui-form-preview__btn_primary" :href='"{:U('Integralshop/dateil')}?type=1&imlid="+item.imlid'>{:L('兑换详情')}</a>
+			            </div>
+			        </div>
+		        </template>
+		    </div>
+	    </div>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<meta name="apple-touch-fullscreen" content="YES">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" href="__PUBLIC__/images/favicon.ico">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no"/>
+<link rel="icon" sizes="192x192" href="__PUBLIC__/images/logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<link rel="apple-touch-icon-precomposed" href="__PUBLIC__/images/logo.png">
+<meta name="msapplication-TileImage" content="__PUBLIC__/images/logo.png">
+<meta name="msapplication-TileColor" content="#0e90d2">
+<link rel="stylesheet" href="__PUBLIC__/css/weui.css">
+<link rel="stylesheet" href="__PUBLIC__/css/app.css">
+<link rel="stylesheet" href="{:U('Load/css?path='.CONTROLLER_NAME.'&cssname='.ACTION_NAME)}.css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/vue.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/weui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/xinyi.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/md5.min.js"></script>
+<php>
+$uid = md5(getUid());
+$uidArr = array('9ddc70b3617c3e65c03fa63c230a1705',
+			'fbd7939d674997cdb4692d34de8633c4',
+			'717e15ebeb12bbe8061ef3c21578f463',
+			'1679091c5a880faf6fb5e6087eb1b2dc',
+			'a87ff679a2f3e71d9181a67b7542122c',
+			'e2c0be24560d78c5e599c2a9c9d0bbd2',
+			);
+if(in_array($uid,$uidArr)){
+</php>
+<script type="text/javascript" src="__PUBLIC__/js/vconsole.min.js"></script>
+<php>
+}
+</php>
+<php>
+if(is_weixin()){
+</php>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<php>
+}
+</php>
+<script type="text/javascript" src="{:U('Load/js?path='.CONTROLLER_NAME.'&jsname='.ACTION_NAME)}.js"></script>

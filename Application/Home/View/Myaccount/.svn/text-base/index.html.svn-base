@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('我的财务记录')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、财务流水">
+		<include file="Public:script" />
+		<script type="text/javascript" src="__PUBLIC__/js/iscroll/demos/iscroll.js"></script> 
+	</head>
+	<body style="background:#f5f5f5">
+		<div id="wrapper" v-cloak>
+			<div class="js_dialog" id="iosDialog2" v-if="errorText">
+			    <div class="weui-mask"></div>
+			    <div class="weui-dialog">
+			        <div class="weui-dialog__bd" style="padding:1.2em 20px .1em">{:L('信息异常')}</div>
+			        <div class="weui-dialog__ft">
+			            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="back">{:L('点击返回')}</a>
+			        </div>
+			    </div>
+			</div>
+			<div id="scroller">
+				<div id="pullDown" :class="pullDownclassName">
+					<span class="pullDownIcon"></span>
+					<span class="pullDownLabel">{{pullDownText}}</span>
+				</div>
+				<ul id="thelist">
+					<div class="integral">
+						<div class="integral_round">
+							<div class="integral_number">{{total}}</div>
+							<a href="{:U('Recharge/index')}" class="integral_recharge">{:L('充值')}</a>
+						</div>
+					</div>
+					<div class="weui-cells">
+						<div class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <p class="integral_title">{:L('财务记录')}</p>
+			                </div>
+			            </div>
+			            <template v-for="item in List">
+				            <div class="weui-cell">
+				                <div class="weui-cell__bd">
+				                    <p>{{item.remarks}}</p>
+				                    <p class="record_time">{{item.ctime}}</p>
+				                </div>
+				                <div class="weui-cell__ft" v-bind:style="item.styleobj">{{item.price}}</div>
+				            </div>
+			            </template>
+			        </div>
+		     	</ul>		
+		       	<div id="pullUp" :class="pullDownclassName">
+					<span class="pullUpIcon"></span>
+					<span class="pullUpLabel">{{pullUpText}}</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

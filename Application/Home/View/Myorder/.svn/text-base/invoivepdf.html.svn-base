@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('发票')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、发票">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var pdf = "{$_GET['pdf']}";
+		console.log(pdf,"pdf路径");
+	</script>
+	<body style="background:#f8f8f8">
+		<div id="body">
+			<div class="container">
+				<div class="page input js_show">
+					<embed width="100%" :src="pdfimg" style="margin:0 auto"></embed>
+		       	</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{:L('积分商城')}</title>
+<meta name="keywords" content="芯易科技、轻餐饮、积分商城">
+<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+<include file="Public:script" />
+</head>
+<body>
+	<div id="body" v-cloak>
+		<div class="weui-loadmore"  v-if="loading">
+			<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+		</div>
+		<div class="container" v-else>
+			<section class="Integral_list">
+				<div class="weui_panel">
+					<ul class="Integral_item weui_panel_bd">
+						<template v-for="item in List">
+						<li>
+							<a :href="item.url">
+								<div class="Integral_img" v-bind:style="item.styleobj">
+									<div class="Integral_mask" v-if="item.surplus==0">
+										<img src="__PUBLIC__/images/icon/duihuan5.png" alt="" />
+									</div>
+								</div>
+								<div class="Integral_title">
+									<span class="black">{{item.text}}</span> 
+									<span class="Integral_score yellow">{{item.integral}}{:L('积分')}</span>
+								</div>
+								<div class="Integral_rule">
+									<span class="grey integral_number">{:L('可兑换')}{{item.surplus}}{:L('份')}{:L('剩余')}{{item.available}}{:L('份')}</span> 
+									<span class="go_exchange">{:L('兑换')}</span>
+								</div>
+							</a>
+						</li>
+						</template>
+					</ul>
+				</div>
+			</section>
+			<include file="Public:footer" />
+		</div>
+	</div>
+</body>
+</html>

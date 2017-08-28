@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('门店详情')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、门店详情">
+		<include file="Public:script" />
+		<script type="text/javascript" src="/Public/js/flexslider/jquery.flexslider.js"></script>
+		<script type="text/javascript">
+			var storeid = "{$_GET['storeid']}";
+			var localcode = "{$_GET['localcode']}"?"{$_GET['localcode']}":0;
+			var staid = "{$_GET['staid']}"?"{$_GET['staid']}":'';
+			var stid = "{$_GET['stid']}"?"{$_GET['stid']}":'';
+		</script>
+	</head>
+	<body style="background:#f5f5f5">
+		<div id="body" v-cloak>
+			<div class="weui-loadmore" v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<header class="detail_title">
+					<div class="bgimage" :style="content.styleobj"></div>
+					<div class="weui-cells xinyi">
+						<div class="weui-cell " style="color:#fff;text-shadow:0 0 10px #000;">
+							<div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+								<img :src="content.icon" style="box-shadow:0 0 15px rgba(0,0,0,0.5);width: 60px;height:60px;display: block;border:2px solid #eee">
+							</div>
+							<div class="weui-cell__bd">
+								<p>{{content.storename}}</p>
+								<p style="font-size: 13px;" v-if="localcode!=1">{:L('距离您')}{{longFormat}}<img src="/Public/images/icon/5454.png" alt="" class="distance_img" /></p>
+								<div class="icon_img">
+									<img src="/Public/images/icon/kaopuchi1.png" alt="" / v-if="content.kaopuchi==1">
+									<img src="/Public/images/icon/kaopuchi.png" alt="" / v-else>
+									<img src="/Public/images/icon/kaopuchilevel/renzhengA.png" alt="" / v-if="content.kaopuchilevel=='A'">
+									<img src="/Public/images/icon/kaopuchilevel/renzhengB.png" alt="" / v-if="content.kaopuchilevel=='B'">
+									<img src="/Public/images/icon/kaopuchilevel/renzhengC.png" alt="" / v-if="content.kaopuchilevel=='C'">
+									<img src="/Public/images/icon/kaopuchilevel/renzhengD.png" alt="" / v-if="content.kaopuchilevel=='D'">
+									<img src="/Public/images/icon/shipin1.png" alt="" / v-if="content.kaopuchimedia==1">
+									<img src="/Public/images/icon/shipin.png" alt="" / v-else>
+									<img src="/Public/images/icon/zizhudiancan1.png" alt="" / v-if="content.zizhudiancan==1">
+									<img src="/Public/images/icon/zizhudiancan.png" alt="" / v-else>
+									<img src="/Public/images/icon/wiasong1.png" alt="" / v-if="content.waimaidiancan==1">
+									<img src="/Public/images/icon/wiasong.png" alt="" / v-else>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="weui-cell notice">
+						<div class="weui-cell__hd"><img src="/Public/images/icon/notice.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+						<div class="weui-cell__bd">
+							<p style="font-size:.8em;color:#798588">{{content.notice}}</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</div>
+				</header>
+				<!--轮播图-->
+				<section class="slider" v-if="pics && pics.length!=0">
+					<div class="slider-wrapper flexslider">
+						<ul class="slides">
+							<li v-for="pic in pics">
+								<img :src="pic" />
+							</li>
+						</ul>
+						<div class="js-slidernav">
+							<li v-for="pic in pics"></li>
+						</div>
+					</div>
+				</section>
+
+				<!--时间-->
+				<div class="weui-cells">
+					<div class="weui-cell">
+						<div class="weui-cell__bd">
+							<p>{:L('工作时间')}</p>
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><img src="/Public/images/icon/time1.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+						<div class="weui-cell__bd">
+							<p>{:L('营业时间：')}<span>{{content.starttime}}-{{content.endtime}}</span></p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><img src="/Public/images/icon/time2.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+						<div class="weui-cell__bd">
+							<p>{:L('外送时间：')}<span>{{content.waisongstime}}-{{content.waisongttime}}</span></p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</div>
+				</div>
+				<!--联系方式-->
+				<div class="weui-cells">
+					<div class="weui-cell">
+						<div class="weui-cell__bd">
+							<p>{:L('联系方式')}</p>
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd">
+							<img src="/Public/images/icon/telphone.png" alt="" style="width:20px;margin-right:5px;display:block">
+						</div>
+						<div class="weui-cell__bd">
+							<p>{:L('门店电话：')}
+								<a style="color:#000" :href="'tel:'+ content.telphone" v-if="content.telphone">{{content.telphone}}</a>
+								<span v-else>{:L('暂无')}</span>
+							</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><img src="/Public/images/icon/headset.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+						<div class="weui-cell__bd">
+							<p>{:L('商户电话：')}
+								<a style="color:#000" :href="'tel:'+ content.bussinessphone" v-if="content.bussinessphone">{{content.bussinessphone}}</a>
+								<span v-else>{:L('暂无')}</span>
+							</p>
+						</div>
+						<div class="weui-cell__ft"></div>
+					</div>
+				</div>
+				<!--门店地址-->
+				<div class="weui-panel">
+					<div class="weui-panel__bd">
+						<div class="weui-media-box weui-media-box_text">
+							<div class="weui-cell" style="padding-left:0;padding-top:0">
+								<div class="weui-cell__hd"><img src="/Public/images/icon/address.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+								<div class="weui-cell__bd">
+									<p>{:L('门店地址')}</p>
+								</div>
+								<div class="weui-cell__ft"></div>
+							</div>
+							<p class="weui-media-box__desc">{{content.address}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="dt_footer" v-on:click="submit">{:L('立即自助点餐')}</div>
+				<!--弹框-->
+				<div class="js_dialog" id="iosDialog1" v-if="showModel">
+		            <div class="weui-mask"></div>
+		            <div class="weui-dialog" style="width:90%;max-width:370px">
+		                <div class="weui-dialog__hd"><strong class="weui-dialog__title">{:L('温馨提示')}</strong></div>
+		                <div class="weui-dialog__bd" style="padding: 1.5em 0em">
+		                	<img src="/Public/images/icon/storetype1.png" alt="" v-if="localcode==1&&storetype==3" style="width:100%">
+		                	<img src="/Public/images/icon/storetype2.png" alt="" v-if="localcode==1&&(storetype==1||storetype==2)" style="width:100%">
+		                	<img src="/Public/images/icon/storetype3.png" alt="" v-if="localcode==0&&storetype==3" style="width:100%">
+		                	<img src="/Public/images/icon/storetype4.png" alt="" v-if="localcode==0&&(storetype==1||storetype==2)" style="width:100%">
+		                </div>
+		                <div class="weui-dialog__ft">
+		                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" v-on:click="hideModel">{:L('取消')}</a>
+		                    <a :href='"{:U('Selfshopping/index')}?storeid="+content.storeid+"&localcode="+localcode+"&staid="+staid+"&stid="+stid' class="weui-dialog__btn weui-dialog__btn_primary">{:L('立即点餐')}</a>
+		                </div>
+		            </div>
+		        </div>
+			</div>
+		</div>
+	</body>
+</html>

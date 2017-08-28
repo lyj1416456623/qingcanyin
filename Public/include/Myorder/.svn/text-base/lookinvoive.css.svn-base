@@ -1,0 +1,13 @@
+/*This is Myorder/lookinvoive css file!*/
+.weui-cells{
+	font-size:0.95em;
+}
+.page__hd{
+	background:#fff;
+}
+.page__title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    padding:1em 0;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('兑换详情')}</title>
+		<meta name="keywords" content="芯易科技、轻餐饮、兑换详情">
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var id = "{$_GET['imlid']}";
+	</script>
+	<body>
+		<div id="body" style="background:#f8f8f8;position: absolute;top: 0;right: 0;left: 0;bottom:0" v-cloak>
+			<div class="weui-loadmore" v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="page__bd" v-else>
+		        <div class="weui-form-preview" >
+		        	<div class="weui-form-preview__hd">
+		                <label class="weui-form-preview__label">{:L('所用积分')}</label>
+		                <em class="weui-form-preview__value">{{integral.integral}}{:L('积分')}</em>
+		            </div>
+		            <div class="weui-form-preview__bd">
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('兑换物品')}</label>
+		                    <span class="weui-form-preview__value">{{integral.goodsname}}</span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('兑换数量')}</label>
+		                    <span class="weui-form-preview__value">{{integral.num}}份</span>
+		                </div>
+		                <div class="weui-form-preview__item" >
+		                    <label class="weui-form-preview__label">{:L('兑换时间')}</label>
+		                    <span class="weui-form-preview__value">{{integral.ctime}}</span>
+		                </div>
+		                
+		                <template v-if="integral.type!=1">
+		                	<div class="weui-form-preview__item" >
+			                    <label class="weui-form-preview__label">{:L('券号')}</label>
+			                    <span class="weui-form-preview__value">{{integral.couponcode}}</span>
+			                </div>
+			                <div class="weui-form-preview__item" >
+			                    <label class="weui-form-preview__label">{:L('到期时间')}</label>
+			                    <span class="weui-form-preview__value">{{integral.tdate}}</span>
+			                </div>
+		                </template>
+		                
+		                <template v-if="integral.type==1">
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label">{:L('姓名')}</label>
+			                    <span class="weui-form-preview__value">{{integral.uname}}</span>
+			                </div>
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label">{:L('联系方式')}</label>
+			                    <span class="weui-form-preview__value">{{integral.phone}}</span>
+			                </div>
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label">{:L('地址')}</label>
+			                    <span class="weui-form-preview__value">{{integral.address}}</span>
+			                </div>
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label">{:L('快递公司')}</label>
+			                    <span class="weui-form-preview__value" v-if="integral.delivery">{{integral.delivery}}</span>
+			                    <span class="weui-form-preview__value" v-else>{:L('暂无')}</span>
+			                </div>
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label">{:L('快递编号')}</label>
+			                    <span class="weui-form-preview__value" v-if="integral.deliverycode">{{integral.deliverycode}}</span>
+			                    <span class="weui-form-preview__value" v-else>{:L('暂无')}</span>
+			                </div>
+		                </template>
+		            </div>
+	             	<div class="weui-form-preview__ft" v-if="integral.type!=1">
+		                <a class="weui-form-preview__btn weui-form-preview__btn_primary" :href='"{:U('Mycoupons/detail')}?id="+integral.couponcode'>{:L('立即使用')}</a>
+		            </div>
+		        </div>
+		    </div>
+	    </div>
+	</body>
+</html>

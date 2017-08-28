@@ -1,0 +1,160 @@
+/*This is Shopping/index css file!*/
+.container{
+	width:100%;
+}
+.left{
+ 	width: 26%;
+    height: auto;
+    background: #fff;
+    color: #666666;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    left: 0;
+    top: 45px;
+    bottom: 3.5em;
+    z-index:1;
+}
+.right{
+	overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    width: 74%;
+    background: white;
+    right: 0;
+    top: 45px;
+    bottom: 3.2em;
+    z-index:1;
+    border-left:1px solid #eee;
+}
+.left li{
+	list-style:none;
+	width:70%;
+	padding:.5em 15%;
+	border-bottom:1px solid #eee;
+	position:relative;
+}
+.left li img{
+	width:1.5em;
+	vertical-align: middle;
+	margin-right:.2em;
+}
+.goods{
+	height:1.5em;
+	line-height: 1.5em;
+	position: absolute;
+	right:0;
+	bottom:0;
+}
+.goods img{
+	width:1.5em;
+	float:left;
+}
+.goods span{
+	display: block;
+	width:1.5em;
+	text-align: center;
+	float:left;
+}
+.img{
+	width:100%;
+	height:12em;
+	border:1px solid #eee;
+	background-position: center;
+	background-size:100%;
+	background-repeat: no-repeat;
+}
+.footer{
+	width:100%;
+	height:3.2em;
+	position:fixed;
+	bottom:0;
+	left:0;
+	z-index:121;
+	background:#fff;
+	border-top:1px solid #eee;
+}
+.cart{
+	width:100%;
+	position: fixed;
+	left:0;
+	bottom:3.2em;
+	background:#fff;
+	z-index:2;
+}
+.footer img{
+	width:2.5em;
+}
+.submit{
+	width:6em;
+	height:100%;
+	position:absolute;
+	right:0;
+	bottom:0;
+	background:#009900;
+	text-align: center;
+	line-height: 3.2em;
+	color:#fff;
+}
+.cart_list{
+	max-height:20em;
+	overflow-y: scroll;
+}
+.goodsCart_change .weui-cell:before{
+	border:none;
+}
+.goodsCart_change .weui-cell{
+	padding-top:0;
+	font-size:.8em;
+	color:#999;
+}
+.goodsCart{
+	position:relative;
+	border-top:1px solid #eee;
+}
+.cartgood{
+	top:50%;
+	right:1em;
+	margin-top:-.6em;
+}
+.cart-title{
+	width:62%;
+	white-space:nowrap; 
+	overflow:hidden; 
+	text-overflow:ellipsis;
+}
+.clear:before{
+	border:0;
+}
+.common,.comm{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	z-index:1;
+	background:rgba(0,0,0,.5);
+}
+.comm{
+	z-index:122;	
+}
+#iosDialog1 .weui-cells{
+	max-height:300px;
+	overflow-y:scroll;
+}
+.dialogImg{
+	width:100%;
+	height:13em;
+	display:block;
+	/*border:1px solid #eee;*/
+	background-size:100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.remark .weui-cells:after{
+	border:none;
+}

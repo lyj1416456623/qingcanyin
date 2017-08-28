@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('添加地址')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、添加地址">
+		<include file="Public:script" />
+		<script src="__PUBLIC__/js/lodash.min.js"></script>
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="container">
+				<form id="form">
+					<div class="weui-cells__title">{:L('添加送餐地址')}</div>
+					<div class="weui-cells weui-cells_form">
+			            <div class="weui-cell">
+			                <div class="weui-cell__hd"><label class="weui-label">{:L('姓名')}</label></div>
+			                <div class="weui-cell__bd">
+			                    <input class="weui-input" type="text" name="name" placeholder="请输入您的姓名">
+			                </div>
+			            </div>
+			            <div class="weui-cell">
+			                <div class="weui-cell__hd"><label class="weui-label">{:L('手机号')}</label></div>
+			                <div class="weui-cell__bd">
+			                    <input class="weui-input" type="number" oninput="if(value.length>11)value=value.slice(0,11)" name="phone" placeholder="请输入手机号">
+			                </div>
+			            </div>
+			        </div>
+			        <div class="weui-cells__title">{:L('所在城市')}</div>
+			        <div class="weui-cells">
+			            <div class="weui-cell weui-cell_select">
+			                <div class="weui-cell__bd">
+			                    <select class="weui-select" name="select">
+			                        <option :value="city.cityid" v-for="city in cityList">{{city.name}}</option>
+			                    </select>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="weui-cells__title">{:L('送餐地址')}</div>
+			        <div class="weui-cells weui-cells_form">
+			            <div class="weui-cell" v-on:click="showSearch">
+			                <div class="weui-cell__bd">
+			                    <div class="weui-input" v-if="addresText=='点击搜索地址'" style="color:#75757d">{{addresText}}</div>
+			                    <div class="weui-input" v-else>{{addresText}}</div>
+			                </div>
+			                <div class="weui-cell__ft">
+			                    <img src="/Public/images/icon/5454.png" alt="" style="width:20px;"/>
+			                </div>
+			            </div>
+			            <div class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <input class="weui-input" type="text"  placeholder="X号楼XX单元XXX室" name="room">
+			                </div>
+			            </div>
+			        </div>
+			        <div class="weui-btn-area">
+			            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" v-on:click="submitForm">{:L('保存送餐地址')}</a>
+			        </div>
+		        </form>
+			</div>
+			<div class="rightDisgo" id="rightDisgo" style="display:block">
+				<div class="container" id="container">
+					<div class="page searchbar js_show">
+					    <div class="page__bd">
+					    	<div class="weui-cells__title">{:L('请输入搜索')}</div>
+					        <div class="weui-search-bar" id="searchBar">
+					            <div class="weui-search-bar__form" >
+					                <div class="weui-search-bar__box">
+					                    <i class="weui-icon-search"></i>
+					                    <input type="search" class="weui-search-bar__input" id="searchInput" v-model='search' placeholder="搜索" required="" >
+					                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+					                </div>
+					                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+					                    <i class="weui-icon-search"></i>
+					                    <span>{:L('搜索')}</span>
+					                </label>
+					            </div>
+					            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel" v-on:click="addressText()">{:L('取消')}</a>
+					        </div>
+					        <div class="weui-cells borderNo">
+					            <div class="weui-cell">
+					                <div class="weui-cell__bd">
+					                    <p style="font-size:.8em;color:#bbbbbb">{:L('请输入关键字搜索')}</p>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="weui-cells searchbar-result" id="searchResult" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1); margin-top:0;height:50em">
+					        	<div id="searcher">
+						            <div class="weui-cell weui-cell_access" v-for="address in addressList" v-on:click="addressText(address)">
+						                <div class="weui-cell__bd weui-cell_primary">
+						                    <p>{{address.address}}</p>
+						                </div>
+						            </div>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

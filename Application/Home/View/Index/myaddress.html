@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('我的送餐地址')}</title>
+		<meta name="keywords" content="芯易科技、轻餐饮、收货地址">
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<div class="weui-cells__title">{:L('我的送餐地址列表')}</div>
+				<div class="weui-cells weui-cells_checkbox">
+					<template v-for="item in addressList">
+			            <label class="weui-cell weui-cell_access" :for="item.storeid">
+			                <div class="weui-cell__bd" v-on:click="select(item)">
+			                    <p>{{item.name}} <span style="font-size:.7em;">{{item.phone}}</span></p>
+			                    <p style="font-size:.8em;color:#666">{{item.addressall}}</p>
+			                </div>
+			                <div class="weui-cell__ft"></div>
+			            </label>
+		            </template>
+		        </div>
+		        <div class="weui-btn-area" v-on:click="addAddress">
+		            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">{:L('添加新地址')}</a>
+		        </div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('付款码')}</title>
+		<meta name="keywords" content="芯易科技、轻餐饮、付款码">
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="content" v-else>
+				<p style="color:#4290c7;font-size:1em;margin-top:1em">{:L('会员余额支付')}</p>
+				<p style="margin-top:1em">{:L('使用时请向服务员出示')}</p>
+				<div class="tCode"><img :src="brcode" alt="" /></div>
+				<div class="tCode erCode"><img :src="qrcode" alt="" /></div>
+				<p v-if="!scanned">{:L('将于')}{{time}}{:L('秒后刷新')}</p>
+				<p v-if="scanned">{:L('已扫描')}</p>
+			</div>
+		</div>
+	</body>
+</html>

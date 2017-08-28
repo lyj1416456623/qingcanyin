@@ -1,0 +1,27 @@
+/*This is Mycoupons/detail css file!*/
+.container{
+	width:100%;
+	padding-top:30px;
+	padding-bottom:30px;	
+	background:#000;
+}
+.userImg img{
+	width:4em;
+	border:2px solid #fff;
+	margin-right:1em;
+	border-radius:50%;
+}
+.tCode{
+	width:100%;
+	text-align: center;
+	margin-top:1em;
+}
+.tCode img{
+	width:80%;
+}
+.erCode img{
+	width:60%;
+}
+.weui-footer__link:before{
+	border:none;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('查看发票')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、查看发票">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var orderno = "{$_GET['orderno']}";
+	</script>
+	<body style="background:#f8f8f8">
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<div class="page input js_show">
+					<div class="page__hd">
+				        <h1 class="page__title">{:L('增值税电子发票')}</h1>
+				    </div>
+					<div class="page__bd">
+						<div class="weui-cells" style="margin-top:0">
+							<div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('付款方')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{invoive.Payer}}</p>
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('收款方')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{invoive.Payee}}</p>
+				                </div>
+				            </div>
+				           </div>
+				           <div class="weui-cells">
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('发票金额')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>￥{{invoive.invoiceValue}}</p>
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('开票日期')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{invoive.billingDate}}</p>
+				                </div>
+				            </div>
+				            </div>
+				            <div class="weui-cells">
+				            <!--<div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('收款方识别号')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{invoive.identification}}</p>
+				                </div>
+				            </div>-->
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('发票代码')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{invoive.invoiceCode}}</p>
+				                </div>
+				            </div>
+				            <div class="weui-cell">
+				                <div class="weui-cell__hd"><label class="weui-label">{:L('发票号码')}</label></div>
+				                <div class="weui-cell__bd">
+				                    <p>{{invoive.invoiceNumber}}</p>
+				                </div>
+				            </div>
+				        </div>
+				        <!--<embed width="100%" :src="pdf" style="margin:0 auto"></embed>-->
+				        <div class="weui-cells__title" v-if="invoive.status==1">{:L('正在开票,请稍后查看...')}</div>
+				        <div class="weui-cells" v-if="invoive.status==2">
+				            <!--<a class="weui-cell weui-cell_access" :href='"{:U('Myorder/invoivepdf')}?pdf="+invoive.url'>-->
+				            <a class="weui-cell weui-cell_access" :href='invoive.url'>
+				                <div class="weui-cell__bd">
+				                    <p>{:L('查看PDF')}</p>
+				                </div>
+				                <div class="weui-cell__ft"></div>
+				            </a>
+				            <a class="weui-cell weui-cell_access" v-on:click="sendemail">
+				                <div class="weui-cell__bd">
+				                    <p>{:L('重发至邮箱')}</p>
+				                </div>
+				                <div class="weui-cell__ft"></div>
+				            </a>
+				        </div>
+			       	</div>
+		       	</div>
+			</div>
+		</div>
+	</body>
+</html>

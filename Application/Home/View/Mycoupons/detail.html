@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('券码详情')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、券码详情">
+		<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="content" v-else>
+				<div class="header">
+				
+				</div>
+				<div class="container" v-bind:style="content.styleobj">
+					<div class="page__bd">
+			            <div class="weui-footer" style="color:#fff">
+				            <p class="weui-footer__links">
+				                <p  class="weui-footer__link" style="font-size:1.3em">{{content.title}}</p>
+				            </p>
+				            <p class="weui-footer__text">{:L('有效期')}:{{content.starttime}} 至 {{content.endtime}}</p>
+				            <p class="weui-footer__text">{:L('请将二维码出示给店员')}</p>
+				        </div>
+				    </div>
+				</div>
+				<div class="tCode"><img :src="brcode" alt="" /></div>
+				<div class="tCode erCode"><img :src="qrcode" alt="" /></div>
+			</div>
+		</div>
+	</body>
+</html>

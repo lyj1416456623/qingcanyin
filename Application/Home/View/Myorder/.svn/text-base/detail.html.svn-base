@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('订单详情')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、订单详情">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var orderno = "{$_GET['orderno']}";
+		var type = "{$_GET['type']}"
+	</script>
+	<body style="background:#f9f9f9">
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+		        <div class="js_dialog" v-if="showlist">
+		            <div class="weui-mask"></div>
+		            <div class="weui-dialog">
+		                <div class="weui-dialog__hd"><strong class="weui-dialog__title">{:L('选择取消订单理由')}</strong></div>
+		                <div class="weui-dialog__bd" style="text-align: left;">
+			                <div class="weui-cells weui-cells_radio">
+			                	<template v-for="item in list">
+						            <label class="weui-cell weui-check__label" v-on:click="select(item.dociid)">
+						                <div class="weui-cell__bd">
+						                    <p>{{item.name}}</p>
+						                </div>
+						                <div class="weui-cell__ft">
+						                    <input type="radio" class="weui-check" name="cancel" :id="item.dociid" :value="item.dociid" :checked="item.checked">
+						                    <span class="weui-icon-checked"></span>
+						                </div>
+						            </label>
+					            </template>
+					        </div>
+		                </div>
+		                <div class="weui-dialog__ft">
+		                    <a href="javascript:void(0);" class="weui-dialog__btn weui-dialog__btn_default" v-on:click="hideCode">{:L('取消')}</a>
+		                    <a href="javascript:void(0);" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="cancel">{:L('确定')}</a>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="js_dialog" v-if="showpaytype">
+		            <div class="weui-mask"></div>
+		            <div class="weui-dialog">
+		                <div class="weui-dialog__hd"><strong class="weui-dialog__title">{:L('选择支付方式')}</strong></div>
+		                <div class="weui-dialog__bd" style="text-align: left;">
+			                <div class="weui-cells weui-cells_radio">
+			                	<template v-for="item in paytype">
+						            <label class="weui-cell weui-check__label" v-on:click="selectpaytype(item)">
+						            	<div class="weui-cell__hd">
+						                	<img src="__PUBLIC__/images/icon/yue.png" alt="" style="width:20px;margin-right:5px;display:block" v-if="item.paytype=='0'">
+						                	<img src="__PUBLIC__/images/icon/wechat.png" alt="" style="width:20px;margin-right:5px;display:block" v-else>
+						                </div>
+						                <div class="weui-cell__bd">
+						                	<p v-if="useryue!=null&&item.paytype=='0'">{{item.payname}}<span style="font-size:.6em;color:#999999">{:L('(剩余')}{{useryue}}元)</span></p>
+						                    <p v-else>{{item.payname}}</p>
+						                </div>
+						                <div class="weui-cell__ft">
+						                    <input type="radio" class="weui-check" name="radio" :id="item.paytype" :value="item.paytype" :checked="item.checked">
+						                    <span class="weui-icon-checked"></span>
+						                </div>
+						            </label>
+					            </template>
+					        </div>
+		                </div>
+		                <div class="weui-dialog__ft">
+		                    <a href="javascript:void(0);" class="weui-dialog__btn weui-dialog__btn_default" v-on:click="hideCode">{:L('取消')}</a>
+		                    <a href="javascript:void(0);" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="payorder">{:L('确定')}</a>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="js_dialog" v-if="error">
+	            <div class="weui-mask"></div>
+	            <div class="weui-dialog">
+	                <div class="weui-dialog__hd"><strong class="weui-dialog__title">{:L('下单失败')}</strong></div>
+	                <div class="weui-dialog__bd">{:L('您的账户余额不足')}</div>
+	                <div class="weui-dialog__ft">
+	                    <a href="javascript:void(0);" class="weui-dialog__btn weui-dialog__btn_default" v-on:click="getPaytype(order.type)">{:L('选择其他方式支付')}</a>
+	                    <a href="{:U('Recharge/index')}" class="weui-dialog__btn weui-dialog__btn_primary">{:L('立即去充值')}</a>
+	                </div>
+	            </div>
+	        </div>
+	        	<div class="weui-cells__title" v-if="time!=-1&&time!=0&&order.pstatus==0&&order.rstatus!=1" style="background: #f1f1f1;padding: 15px;margin: 0;text-align: center;color: #000;">{:L('你的订单将于')}<span style="color:#ff8400">{{time}}</span>{:L('后取消，请尽快支付！')}</div>
+				<div class="weui-cells__title">{:L('订单信息')}</div>
+				<div class="weui-form-preview">
+		            <div class="weui-form-preview__hd" v-if="order.isconfirm ==1&&order.pstatus==1&&order.type==4">
+		                <label class="weui-form-preview__label">{:L('取餐号码')}</label>
+		                <em class="weui-form-preview__value" style="font-size:2em">{{order.serial}}</em>
+		            </div>
+		            <div class="weui-form-preview__bd">
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('订单编号')}</label>
+		                    <span class="weui-form-preview__value">{{order.orderno}}</span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('门店')}</label>
+		                    <span class="weui-form-preview__value">{{storename}}</span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('下单时间')}</label>
+		                    <span class="weui-form-preview__value">{{order.addtime}}</span>
+		                </div>
+		                <div class="weui-form-preview__item" v-if="order.yytime">
+		                    <label class="weui-form-preview__label" v-if="order.type == 1">{:L('送达时间')}</label>
+		                    <label class="weui-form-preview__label" v-else>{:L('预约时间')}</label>
+		                    <span class="weui-form-preview__value">{{order.yytime}}</span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('支付方式')}</label>
+		                    <span class="weui-form-preview__value"><span v-for="pay in pay">{{pay.payname}} </span></span>
+		                </div>
+		                <div class="weui-form-preview__item" v-if="order.rstatus!=1">
+		                    <label class="weui-form-preview__label">{:L('支付状态')}</label>
+		                    <span class="weui-form-preview__value" v-if="order.pstatus==0" style="color:#e60012">{:L('未支付')}</span>
+		                    <span class="weui-form-preview__value" v-if="order.pstatus==1">{:L('已支付')}</span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('订单类型')}</label>
+		                    <span class="weui-form-preview__value" v-if="order.type == 1">{:L('外卖')}</span>
+			                <span class="weui-form-preview__value" v-if="order.type == 2">{:L('自取')}</span>
+			                <span class="weui-form-preview__value" v-if="order.type == 3">{:L('堂食')}</span>
+			                <span class="weui-form-preview__value" v-if="order.type == 4">{:L('自助点餐')}</span>
+			                <span class="weui-form-preview__value" v-if="order.type == 5">{:L('便利店')}</span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('订单状态')}</label>
+		                    <span class="weui-form-preview__value" v-if="order.status == 0">{:L('注销')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 1">{:L('新订单')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 2">{:L('处理中')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 3">{:L('制作中')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 4">{:L('配送中')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 5 && order.rstatus==0">{:L('已签收')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 6">{:L('已拒收')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 7">{:L('已审核')}</span>
+			                <span class="weui-form-preview__value" v-if="order.status == 5 && order.rstatus==1">{:L('已注销')}</span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label">{:L('订单总价')}</label>
+		                    <span class="weui-form-preview__value">{{order.allprice}}{:L('元')}</span>
+		                </div>
+		            </div>
+		       </div>
+		        <template v-if="order.type == 1">
+			        <div class="weui-cells__title">{:L('配送地址')}</div>
+					<div class="weui-cells">
+			            <label class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <p>{{address.name}}  <span >{{address.phone}}</span></p>
+			                    <p style="font-size:.8em;color:#666;margin-top:.5em">{{address.address}}</p>
+			                </div>
+			                <div class="weui-cell__ft"></div>
+			            </label>
+		           	</div>
+	           	</template>
+	           	<div class="weui-cells__title">{:L('购买的商品')}</div>
+		        <div class="weui-cells cart_list_border" style="margin-top:0">
+		        	<template v-for="goods in goods">
+		            	<div class="goodsCart">
+		            		<!--套餐-->
+		            		<div class="goods">
+			            		<div class="weui-cell">
+					                <div class="weui-cell__hd"><img :src="goods.goodsimg" style="width:20px;height:20px;margin-right:5px;display:block"></div>
+					                <div class="weui-cell__bd" style="width:100%;">
+					                    <p style="width: 95%; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{goods.goodsname}}</p>
+					                </div>
+					            </div>
+					            <div class="cartgood">X{{goods.goodsno}}</div>
+				            	<div class="goodsprice">￥{{goods.sprice}}</div>
+				            </div>
+				            <!--小项-->
+				            <div class="goodsCart_change" v-if="goods.suitflag==1||goods.remarks.length>0">
+				            	<template v-if="goods.suitflag==1" v-for="suit in goods.suitflagdata">
+					            	<div class="weui-cell">└&nbsp  
+						                <div class="weui-cell__hd">
+						                	<img :src="suit.goodsimg" style="width:10px;height:10px;margin-right:5px;display:block">
+						                </div>
+						                <div class="weui-cell__bd">
+						                    <p>{{suit.goodsname}} X{{suit.goodsno}} (+{{suit.addprice}}￥)</p>
+						                </div>
+						            </div>
+					            </template>
+					            <div class="weui-cell" v-if="goods.remarks.length>0">
+					                <div class="weui-cell__bd" >
+					                    <p style="font-size:.8em">{:L('备注:')}
+					                    	<span v-for="remarks in goods.remarks">{{remarks}} </span>
+					                    </p>
+					                </div>
+					            </div>
+				            </div>
+			           	</div>
+		           	</template>
+		           	<div class="weui-cell free_fee" v-if="box.sprice && box.sprice!=0.00">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('餐盒费')}</p>
+		                </div>
+		                <div class="weui-cell__ft" style="font-size:.8em;color:#000">￥{{box.sprice}}</div>
+		            </div>
+		            <div class="weui-cell" v-if="order.type==1&&song.sprice">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('配送费')}</p>
+		                </div>
+		                <div class="weui-cell__ft" style="font-size:.8em;color:#000">￥{{song.sprice}}</div>
+		            </div>
+		        </div>
+		        <template v-if="(order.status == 1 && (order.pstatus==0 || (order.pstatus==1 && (order.type == 4 && order.isconfirm==0) || order.type == 1))) || (order.status == 5 && order.rstatus == 0 && storefapiao )">
+			        <div class="weui-cells__title">
+			        	{:L('操作')}
+			        </div>
+			        <div class="weui-cells" >
+			        	<a class="weui-cell weui-cell_access" v-on:click="getPaytype(order.type)"  v-if="order.status == 1&&order.pstatus=='0'">
+			                <div class="weui-cell__bd">
+			                    <p style="color:#00c705">{:L('去支付')}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                </div>
+			            </a>
+			            <a class="weui-cell weui-cell_access" v-on:click="scanQRCode"  v-if="order.pstatus=='1'&& order.status == 1 && order.isconfirm != '1' && order.type == 4">
+			                <div class="weui-cell__bd">
+			                    <p>{:L('扫一扫取餐')}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                </div>
+			            </a>
+			        	<!--<a class="weui-cell weui-cell_access" :href='"{:U('Myorder/paycode')}?code="+order.code' v-if="order.type == 4 && order.pstatus=='1' && order.status > 0 && order.status < 5">
+			                <div class="weui-cell__bd">
+			                    <p>{:L('取餐')}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                </div>
+			            </a>-->
+			            <a class="weui-cell weui-cell_access" href="javascript:void(0);" v-on:click="cancelorder" v-if="order.status==1 && order.pstatus=='1'&&((order.type == 4 && order.isconfirm=='0')||order.type == 1)">
+			                <div class="weui-cell__bd">
+			                    <p style="color:#ff0000">{:L('取消订单')}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                </div>
+			            </a>
+			            <a class="weui-cell weui-cell_access" :href='"{:U('Myorder/invoive')}?orderno="+order.orderno+"&storeid="+order.storeid+"&addtime="+order.addtime+"&effective="+effective' v-if="storefapiao&&!fapiao && effective >0 && (order.status == 5 && order.rstatus==0)">
+			                <div class="weui-cell__bd">
+			                    <p>{:L('领取发票')}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                </div>
+			            </a>
+			            <a class="weui-cell weui-cell_access" :href='"{:U('Myorder/invoive')}?orderno="+order.orderno+"&storeid="+order.storeid+"&addtime="+order.addtime+"&effective="+effective' v-if="storefapiao&&fapiao && fapiaostatus == '0' && effective >0 && (order.status == 5 && order.rstatus==0)">
+			                <div class="weui-cell__bd">
+			                    <p>{:L('重开发票')}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                </div>
+			            </a>
+			            <a class="weui-cell weui-cell_access" :href='"{:U('Myorder/lookinvoive')}?orderno="+order.orderno' v-if="storefapiao&&fapiao && fapiaostatus!='0' && order.status == 5 && order.rstatus == 0">
+			                <div class="weui-cell__bd">
+			                    <p>{:L('查看发票')}</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                </div>
+			            </a>
+			        </div>
+		        </template>
+		        <div class="weui-cells__title" v-if="order.status == 5 && order.rstatus==0 && !storefapiao">{:L('该门店暂不支持领取电子发票')}</div>
+          	</div>
+		</div>
+	</body>
+</html>

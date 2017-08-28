@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('外卖点餐')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、外卖点餐">
+		<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="js_dialog" id="iosDialog2" v-if="locationFlag">
+			    <div class="weui-mask"></div>
+			    <div class="weui-dialog">
+			        <div class="weui-dialog__bd" style="padding:1.2em 20px .1em">{:L('该地址下暂无商品信息，请稍后再试')}</div>
+			        <div class="weui-dialog__ft">
+			            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="back">{:L('返回地址列表')}</a>
+			        </div>
+			    </div>
+			</div>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="content" v-else>
+				<div class="weui-cells" style="margin-top:0;position: fixed;top:0;left:0;width:100%">
+		            <a class="weui-cell weui-cell_access" href="{:U('shopping/selectaddress')}">
+		                <div class="weui-cell__bd" style="width:83%">
+		                    <p style="font-size:.8em;width:100%;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{:L('送到 :')} {{address}}</p>
+		                </div>
+		                <div class="weui-cell__ft">{:L('更换')}</div>
+		            </a>
+		        </div>
+		        <!--遮罩-->
+	        	<div class="comm" v-if="showSuitflag"></div>
+	        	<div class="common" v-if="showCartanimationData" v-on:click="hideCart"></div>
+		        <!--小项-->
+	        	<!--<template v-if="storedatu && showSuitflag">
+	                <div id="dialogs">
+				        <div class="js_dialog" id="iosDialog1">
+				            <div class="weui-dialog" style="max-width:100%;width:100%;top:0;left:0;transform:translate(0,0);overflow: scroll;overflow-x: hidden;height:100%">
+				            	<div class="dialogImg" :style="currentImg"></div>
+					            <form id="selectSuitOrRemark">
+					            	<div class="goods_small" v-if="suitflag==1">
+						            	<div class="weui-cells__title" style="text-align: left;">{:L('这个套餐可以自己定义哦！')}</div>
+						                <div class="weui-cells" style="max-height:none;overflow: visible;">
+								            <div class="weui-cell weui-cell_select" v-for="(select,index) in suitflagdata">
+								                <div class="weui-cell__bd">
+								                    <select class="weui-select" :name="'select'+index" >
+								                        <option v-for="option in select" :value="option.goodsid">{{option.goodsname}} X {{option.goodsno}} + {{option.addprice}}</option>
+								                    </select>
+								                </div>
+								            </div>
+								        </div>
+							        </div>
+							        <div class="remark">
+							        	<div class="weui-cells__title" style="text-align: left;" v-if="remarks.length>0">{:L('想吃什么口味告诉我！')}</div>
+							        	<div class="weui-cells weui-cells_checkbox" style="max-height:none;overflow: visible;">
+								            <label class="weui-cell weui-check__label" v-for="(remark,index) in remarks">
+								                <div class="weui-cell__hd">
+								                    <input type="checkbox" class="weui-check" :name="'remarks'+index" :value="remark.remarksid">
+								                    <i class="weui-icon-checked"></i>
+								                </div>
+								                <div class="weui-cell__bd" style="text-align:left"> 
+								                    <p>{{remark.remarks}}</p>
+								                </div>
+								            </label>
+								        </div>
+							        </div>
+				                </form>
+				            </div>
+				        </div>
+				    </div>
+				    <div class="weui-dialog__ft" style="position:fixed;width:100%;left:0;bottom:0;z-index:1111111;background:#fff;text-align: center;">
+	                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" v-on:click="cancel">{:L('取消')}</a>
+	                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="addShopcart">{:L('确定')}</a>
+	                </div>
+			    </template>
+			    <template v-else>-->
+	                <div id="dialogs" v-if="showSuitflag">
+				        <!--BEGIN dialog1-->
+				        <div class="js_dialog" id="iosDialog1">
+				            <div class="weui-dialog">
+					            <form id="selectSuitOrRemark">
+					            	<div class="goods_small" v-if="suitflag==1">
+						            	<div class="weui-cells__title" style="text-align: left;">{:L('这个套餐可以自己定义哦！')}</div>
+						                <div class="weui-cells" >
+								            <div class="weui-cell weui-cell_select" v-for="(select,index) in suitflagdata">
+								                <div class="weui-cell__bd">
+								                    <select class="weui-select" :name="'select'+index" >
+								                        <option v-for="option in select" :value="option.goodsid">{{option.goodsname}} X {{option.goodsno}} + {{option.addprice}}</option>
+								                    </select>
+								                </div>
+								            </div>
+								        </div>
+							        </div>
+							        <div class="remark">
+							        	<div class="weui-cells__title" style="text-align: left;" v-if="remarks.length>0">{:L('想吃什么口味告诉我！')}</div>
+							        	<div class="weui-cells weui-cells_checkbox">
+								            <label class="weui-cell weui-check__label" v-for="(remark,index) in remarks">
+								                <div class="weui-cell__hd">
+								                    <input type="checkbox" class="weui-check" :name="'remarks'+index" :value="remark.remarksid">
+								                    <i class="weui-icon-checked"></i>
+								                </div>
+								                <div class="weui-cell__bd" style="text-align:left"> 
+								                    <p>{{remark.remarks}}</p>
+								                </div>
+								            </label>
+								        </div>
+							        </div>
+					                <div class="weui-dialog__ft">
+					                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" v-on:click="cancel">{:L('取消')}</a>
+					                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="addShopcart">{:L('确定')}</a>
+					                </div>
+				                </form>
+				            </div>
+				        </div>
+				    </div>
+			    <!--</template>-->
+		        <div class="contaienr">
+		        	<div class="left">
+		        		<template v-for="(item,index) in typedata">
+		        			<li v-if="item.icon!=''" v-on:click="floor(index)"><img :src="item.icon" alt="" />{{item.typename}}
+		        				<span class="weui-badge" style="position: absolute;top: .5em;right: 1em;" v-if = "item.typenumber > 0">{{item.typenumber}}</span>
+		        			</li> 
+			        		<li v-else v-on:click="floor(index)">
+			        			{{item.typename}}
+			        			<span class="weui-badge" style="position: absolute;top: .5em;right: 1em;" v-if="item.typenumber > 0">{{item.typenumber}}</span>
+			        		</li> 
+		        		</template>
+		        	</div>
+		        	<div class="right">
+		        		<div class="goods_list" v-for="item in typedata">
+			        		<div class="weui-cell" style="color:#999;background:#f7f7f7;padding:8px 15px">
+				                <div class="weui-cell__hd" v-if="item.icon!=''">
+				                	<img :src="item.icon" alt="" style="width:15px;margin-right:5px;display:block">
+				                </div>
+				                <div class="weui-cell__bd">
+				                    <p>{{item.typename}}</p>
+				                </div>
+				            </div>
+				            <!--商品-->
+				            <template v-if="storedatu">
+				        		<div class="weui-cells" style="margin:0" v-for="(list,index) in goodsdata[item.typeid]">
+						            <div class="weui-cell" style="display:inherit">
+						            	<div class="img" v-bind:style="list.backgroundImage"></div>
+						                <div class="weui-cell__bd" style="position: relative;">
+						                    <p>{{list.goodsname}}</p>
+						                    <p style="font-size: 13px;color: #888888;">{{list.info}}</p>
+						                    <p style="font-size: 13px;color: #888888;">{:L('月售')}{{list.sales}}</p>
+						                    <p style="color:#ff0000">￥{{list.price}}</p>
+						                    <div class="goods">
+						                    	<img src="/Public/images/icon/remove.png" alt="" class="minus" v-if="list.count>0 && list.suitflag!=1 && list.remarks.length==0" v-on:click="minusCart(list)"/>
+						                    	<span v-if="list.count>0">{{list.count}}</span>
+						                    	<img src="/Public/images/icon/plus.png" alt="" class="add" v-on:click="addCart(list,index,item.typeid)"/>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+					        </template>
+					        <template v-else>
+				        		<div class="weui-cells" style="margin:0" v-for="(list,index) in goodsdata[item.typeid]">
+						            <div class="weui-cell">
+						                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+						                    <img :src="list.goodspic" style="width: 50px;height:50px;display: block">
+						                </div>
+						                <div class="weui-cell__bd" style="position: relative;">
+						                    <p>{{list.goodsname}}</p>
+						                    <p style="font-size: 13px;color: #888888;">{{list.info}}</p>
+						                    <p style="font-size: 13px;color: #888888;">{:L('月售')}{{list.sales}}</p>
+						                    <p style="color:#ff0000">￥{{list.price}}</p>
+						                    <div class="goods">
+						                    	<img src="/Public/images/icon/remove.png" alt="" class="minus" v-if="list.count>0 && list.suitflag!=1 && list.remarks.length==0" v-on:click="minusCart(list)"/>
+						                    	<span v-if="list.count>0">{{list.count}}</span>
+						                    	<img src="/Public/images/icon/plus.png" alt="" class="add" v-on:click="addCart(list,index,item.typeid)"/>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+					        </template>
+				        </div>
+		        	</div>
+		        	<!--购物车-->
+		        	<div class="cart" v-if="showCartanimationData">
+		        		<div class="weui-cell" style="height:1.5em;border-top:1px solid #eee">
+			                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+			                    <img src="/Public/images/icon/shopping_cart.png" style="width: 2.5em;display: block;margin-top:-2.5em;">
+			                    <span class="weui-badge" style="position: absolute;top: -3.5em;right:-.4em;">{{allnumber}}</span>
+			                </div>
+			            	<div class="weui-cell clear" style="position: absolute;right:0;" v-on:click="clearCart">
+				                <div class="weui-cell__hd"><img src="/Public/images/icon/delete.png" alt="" style="width:15px;margin-right:5px;display:block"></div>
+				                <div class="weui-cell__bd">
+				                    <p style="font-size:.8em;color:#999">{:L('清空购物车')}</p>
+				                </div>
+				            </div>
+			            </div>
+			            <div class="cart_list">
+			            	<div class="weui-cells" style="margin-top:0">
+				            	<div class="goodsCart" style="width:100%;" v-for="cartItem in cartGoodsData">
+				            		<!--套餐-->
+				            		<div class="weui-cell">
+						                <div class="weui-cell__hd"><img :src="cartItem.goodspic" alt="" style="width:20px;margin-right:5px;display:block"></div>
+						                <div class="weui-cell__bd">
+						                    <p class="cart-title" v-if="cartItem.suitflag!=1">{{cartItem.goodsname}} {{cartItem.priceFormat}}</p>
+						                    <p class="cart-title" v-else>{{cartItem.goodsname}} {{cartItem.priceFormat}} (含加价)</p>
+						                </div>
+						            </div>
+						            <!--小项-->
+						            <div class="goodsCart_change">
+						            	<template v-if="cartItem.suitflag==1" v-for="suitItem in cartItem.suitflagdata">
+						            	<div class="weui-cell">└ 
+							                <div class="weui-cell__hd">
+							                	<img :src="suitItem.goodspic" alt="" style="width:10px;margin-right:5px;display:block">
+							                </div>
+							                <div class="weui-cell__bd">
+							                    <p>{{suitItem.goodsname}} X {{suitItem.goodsno}} (+{{suitItem.addprice}}￥)</p>
+							                </div>
+							            </div>
+							            </template>
+							            <div class="weui-cell" v-if="cartItem.remarks.length>0">
+							                <div class="weui-cell__bd">
+							                    <p>{:L('备注:')}
+							                    	<span v-for="remarks in cartItem.remarks">{{remarks.remarks}} </span>
+							                    </p>
+							                </div>
+							            </div>
+						            </div>
+						            <div class="goods cartgood">
+				                    	<img src="/Public/images/icon/remove.png" alt="" class="minus" v-on:click="minusCartdata(cartItem)"/>
+				                    	<span>{{cartItem.goodsno}}</span>
+				                    	<img src="/Public/images/icon/plus.png" alt="" class="add" v-on:click="plusCartdata(cartItem)"/>
+				                    </div>
+				            	</div>
+				           </div>
+			            </div>
+		        	</div>
+		        	<div class="footer">
+		        		<div class="weui-cell" v-on:click="showCart">
+			                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;" v-if="showCartbox">
+			                    <img src="/Public/images/icon/shopping_cart.png" style="width: 2.5em;display: block;margin-top:-3em;">
+			                    <span class="weui-badge" style="position: absolute;top: -4.5em;right:-.4em;" v-if="allnumber>0">{{allnumber}}</span>
+			                </div>
+			                <div class="weui-cell__bd">
+			                    <div v-if="allnumber==0" style="margin-top:-.5em">
+			                    	<p>{:L('您还没有点菜哦！')}</p>
+			                    	<p style="font-size:.8em;color:#666">{:L('满')}{{freePrice}}{:L('元可免配送费')}</p>
+			                    </div>
+			                    <div v-else style="margin-top:-.5em">
+			                    	<p>{:L('共￥')}{{totalPrice}}</p>
+			                    	<p style="font-size:.8em;color:#666">{:L('总价=')}  {{allprice}} + {{packboxPrice}} + {{feePrice}}</p>
+			                    </div>
+			                </div>
+			            </div>
+			            <a class="submit" v-if="allnumber==0" style="background:#a5caa5">{:L('立即下单')}</a>
+			            <a :href="url" class="submit" v-else>{:L('立即下单')}</a>
+		        	</div>
+		        </div>
+	        </div>
+        </div>
+	</body>
+</html>

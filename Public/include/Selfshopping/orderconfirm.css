@@ -1,0 +1,82 @@
+/*This is Selfshopping/orderconfirm css file!*/
+.container{
+	padding-bottom:3em;
+}
+.goods{
+	width:60%;
+}
+.goodsCart_change .weui-cell:before{
+	border:none;
+}
+.goodsCart_change .weui-cell{
+	padding-top:0;
+	font-size:.8em;
+	color:#999;
+}
+.goodsCart{
+	width:100%;
+	position:relative;
+	border-bottom: 1px solid #eee;
+}
+.cartgood{
+	position: absolute;
+	top:20px;
+	left:60%;
+	margin-top:-.6em;
+	font-size:.8em;
+	color:#808080;
+}
+.goodsprice{
+	position: absolute;
+	top:20px;
+	right:4%;
+	margin-top:-.6em;
+	font-size:.8em;
+}
+.cart_list_border:before{
+	border:none;
+}
+/*打包*/
+.pack{
+	padding:3px;
+	background:#ffc801;
+	color:#fff;
+	font-size:.6em;
+	margin-left:5px;
+	border-radius: 5px;
+	float:left;
+}
+.free_fee:before{
+	border:none;
+}
+.footer{
+	width:100%;
+	height:3em;
+	background:#fff;
+	position: fixed;
+	bottom:0;
+	left:0;
+	line-height:3em;
+	z-index:2;
+}
+.footer p{
+	text-indent: 1em;
+}
+.footer .submit{
+	position: absolute;
+	right:0;
+	bottom:0;
+	width:6em;
+	height:100%;
+	text-align: center;
+	color:#fff;
+	background:#009900;
+}
+.weui-dialog__ft{
+	font-size:.8em;
+}
+#iosDialog1 .weui-cells{
+	max-height:300px;
+	overflow-y:scroll;
+}
+

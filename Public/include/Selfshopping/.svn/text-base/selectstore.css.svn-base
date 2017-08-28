@@ -1,0 +1,26 @@
+/*This is Selfshopping/selectstore css file!*/
+.distance{
+	font-size:.5em;
+	margin-left:.5em;
+}
+.distance_img{
+	width:.7em;
+	/*margin-left:.1em;*/
+}
+.icon_img img{
+	width:1em;
+	height:1em;
+	margin-right:.5em;
+	margin-top:.3em;
+	float:left;
+}
+.icon_img:after{
+	content:".";        
+    display:block;        
+    height:0;        
+    clear:both;        
+    visibility:hidden; 
+}
+.backIndex:after{
+	border:none;
+}

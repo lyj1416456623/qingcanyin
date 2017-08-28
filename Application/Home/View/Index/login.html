@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$title}</title>
+<meta name="keywords" content="芯易科技、轻餐饮、登录、绑定">
+<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+<include file="Public:script" />
+</head>
+<!--从哪里回哪去  satrt-->
+<script type="text/javascript">
+ var jumpurl = "{$jumpurl}";
+ var wxkey = "{$wxkey}";
+ console.log(jumpurl);
+</script>
+<!--end  -->
+<body style="background:#fbfafa">
+	<div id="body" >
+		<div class="weui-cells weui-cells_form" style="margin-top:2.5em">
+		    <div class="weui-cell weui-cell_vcode">
+		        <div class="weui-cell__hd">
+		            <label class="weui-label">{:L('手机号')}</label>
+		        </div>
+		        <div class="weui-cell__bd">
+		            <input class="weui-input" type="number" oninput="if(value.length>11)value=value.slice(0,11)" placeholder="{:L('请输入手机号')}" v-model="phone">
+		        </div>
+		        <div class="weui-cell__ft">
+		            <button class="weui-vcode-btn" v-if="countdown" v-on:click="getPhone">{:L('获取验证码')}</button>
+		            <button class="weui-vcode-btn" v-else>{{time}}{:L('秒重新发送')}</button>
+		        </div>
+		    </div>
+		    <div class="weui-cell">
+	            <div class="weui-cell__hd"><label class="weui-label">{:L('验证码')}</label></div>
+	            <div class="weui-cell__bd">
+	                <input class="weui-input" type="number" pattern="[0-9]*" placeholder="{:L('请输入验证码')}" v-model="code">
+	            </div>
+	        </div>
+		</div>
+		<label for="weuiAgree" class="weui-agree">
+	        <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" v-model="checkbox" v-on:click="boxSelect" >
+	        <span class="weui-agree__text">{:L('阅读并同意')}
+	            <a href="javascript:void(0);">{:L('《相关条款》')}</a>
+	        </span>
+	    </label>
+	    <div class="weui-btn-area">
+	        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" v-on:click="submitForm">{:L('确定')}</a>
+	    </div>
+    </div>
+</body>
+</html>

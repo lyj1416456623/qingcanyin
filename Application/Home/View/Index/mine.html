@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>{:L('我的')}</title>
+	<meta name="keywords" content="芯易科技、轻餐饮、我的、信息">
+	<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+	<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore" v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<div class="header">
+					<img :src="myPage.usericon" alt="" />
+				</div>
+				<div class="weui-grids">
+			        <a href="javascript:;" class="weui-grid">
+			           	<p class="weui-grid__label">{{myPage.num}}</p>
+			            <p class="weui-grid__label">{:L('订单')}</p>
+			        </a>
+			        <a href="javascript:;" class="weui-grid">
+			            <p class="weui-grid__label">{{myPage.yue}}</p>
+			            <p class="weui-grid__label">{:L('余额')}</p>
+			        </a>
+			        <a href="javascript:;" class="weui-grid">
+			            <p class="weui-grid__label">{{myPage.jifen}}</p>
+			            <p class="weui-grid__label">{:L('积分')}</p>
+			        </a>
+			    </div>
+			    <div class="weui-cells">
+		            <a class="weui-cell weui-cell_access" href="{:U('Index/myaddress')}">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('我的收货地址')}</p>
+		                </div>
+		                <div class="weui-cell__ft">
+		                </div>
+		            </a>
+		            <a class="weui-cell weui-cell_access" href="{:U('Myorder/index')}">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('我的订单列表')}</p>
+		                </div>
+		                <div class="weui-cell__ft">
+		                </div>
+		            </a>
+		            <a class="weui-cell weui-cell_access" href="{:U('Myaccount/index')}">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('我的财务记录')}</p>
+		                </div>
+		                <div class="weui-cell__ft">
+		                </div>
+		            </a>
+		            <a class="weui-cell weui-cell_access" href="{:U('Myintegral/index')}">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('我的积分记录')}</p>
+		                </div>
+		                <div class="weui-cell__ft">
+		                </div>
+		            </a>
+		            <a class="weui-cell weui-cell_access" href="{:U('Integralshop/exchangelist')}">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('我的兑换记录')}</p>
+		                </div>
+		                <div class="weui-cell__ft">
+		                </div>
+		            </a>
+		        </div>
+			</div>
+		</div>
+	</body>
+</html>

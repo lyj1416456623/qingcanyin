@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('待取餐列表')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、订单列表">
+		<include file="Public:script" />
+		<script type="text/javascript" src="__PUBLIC__/js/vconsole.min.js"></script>
+	</head>
+	<script type="text/javascript">
+		var returnwx = "{$_GET['returnwx']}";
+		var code = "{$_GET['code']}";
+		var appid = "{$_GET['appid']}";
+		var state = "{$_GET['state']}";
+		var storeid = "{$_GET['storeid']}";
+		var localcode = "{$_GET['localcode']}";
+		var staid = "{$_GET['staid']}"?"{$_GET['staid']}":'';
+		var stid = "{$_GET['stid']}"?"{$_GET['stid']}":'';
+	</script>
+	<body style="background:#f8f8f8">
+		<div class="page preview js_show" id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="page__bd" v-else>
+				<div class="weui-cells__title">{:L('订单列表')}</div>
+				<div class="weui-form-preview" v-for="item in list">
+					<div class="weui-form-preview__hd">
+						<label class="weui-form-preview__label">{:L('付款金额')}</label>
+						<em class="weui-form-preview__value">¥{{item.price}}</em>
+					</div>
+					<div class="weui-form-preview__bd">
+						<div class="weui-form-preview__item">
+							<label class="weui-form-preview__label">{:L('订单号')}</label>
+							<span class="weui-form-preview__value">{{item.orderno}}</span>
+						</div>
+						<div class="weui-form-preview__item">
+							<label class="weui-form-preview__label">{:L('门店')}</label>
+							<span class="weui-form-preview__value">{{item.storename}}</span>
+						</div>
+						<div class="weui-form-preview__item">
+							<label class="weui-form-preview__label">{:L('订单总价')}</label>
+							<span class="weui-form-preview__value">￥{{item.price}}元</span>
+						</div>
+						<div class="weui-form-preview__item">
+							<label class="weui-form-preview__label">{:L('下单时间')}</label>
+							<span class="weui-form-preview__value">{{item.addtime}}</span>
+						</div>
+					</div>
+					<div class="weui-form-preview__ft">
+						<a class="weui-form-preview__btn weui-form-preview__btn_default" :href='"{:U('Selfshopping/orderdetail')}?orderno="+item.orderno+"&storeid="+storeid+"&localcode=1&staid="+staid+"&stid="+stid'>{:L('查看订单')}</a>
+						<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" v-on:click="bind(item)">
+							<span v-if="staid!=''">{:L('绑定桌台')}</span>
+							<span v-else>{:L('取餐')}</span>
+						</button>
+					</div>
+				</div>
+				<div class="weui-btn-area">
+		            <a class="weui-btn weui-btn_primary" :href='"{:U('Selfshopping/storeinfo')}?storeid="+storeid+"&localcode="+localcode+"&staid="+ staid +"&stid=" +stid'>{:L('重新点餐')}</a>
+		        </div>
+			</div>
+		</div>
+	</body>
+</html>

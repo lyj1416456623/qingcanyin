@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('选择门店')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、门店列表">
+		<include file="Public:script" />
+	</head>
+	<body style="width:100%;background:#f8f8f8">
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="page msg_warn js_show" v-if="errorText" style="background:#f8f8f8">
+			    <div class="weui-msg">
+			        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+			        <div class="weui-msg__text-area">
+			            <h2 class="weui-msg__title">{:L('欢迎您,朋友!')}</h2>
+			            <p class="weui-msg__desc">{:L('我们暂时没有开通自助点餐的门店')}</p>
+			        </div>
+			        <div class="weui-msg__opr-area">
+			            <p class="weui-btn-area">
+			                <a href="{:U('Shopping/selectaddress')}" class="weui-btn weui-btn_primary">{:L('叫个外卖')}</a>
+			                <a href="{:U('Index/index')}" class="weui-btn weui-btn_default backIndex">{:L('返回首页')}</a>
+			            </p>
+			        </div>
+			        <div class="weui-msg__extra-area">
+			            <div class="weui-footer">
+			                <p class="weui-footer__links">
+			                    <a href="javascript:void(0);" class="weui-footer__link">{:L('由轻餐饮提供技术支持和数据服务')}</a>
+			                </p>
+			                <p class="weui-footer__text">Copyright © 2014-2017 qingcanyin.cn</p>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="content" v-else>
+				<div class="weui-cells" style="margin:0">
+					<!--门店列表-->
+					<template v-for="item in content">
+			            <div class="weui-cell weui-cell_access" v-on:click="select(item)">
+			                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+			                    <img :src="item.icon" style="width: 50px;height:50px;display: block">
+			                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;" v-if="item.number>0">{{item.number}}</span>
+			                </div>
+			                <div class="weui-cell__bd">
+			                    <p style="width:85%">{{item.storename}}<span class="distance">{:L('距离')}{{item.longFormat}}</span>
+			                    	<img src="/Public/images/icon/5454.png" alt=""  class="distance_img" />
+			                    </p>
+			                    <p style="font-size: 13px;color: #888888;">{{item.notice}}</p>
+			                    <div class="icon_img">
+			                    	<img src="/Public/images/icon/kaopuchi1.png" alt=""/ v-if="item.kaopuchi==1">
+			                    	<img src="/Public/images/icon/kaopuchi.png" alt=""/ v-else>
+			                    	<img src="/Public/images/icon/kaopuchilevel/renzhengA.png" alt=""/ v-if="item.kaopuchilevel=='A'">
+			                    	<img src="/Public/images/icon/kaopuchilevel/renzhengB.png" alt=""/ v-if="item.kaopuchilevel=='B'">
+			                    	<img src="/Public/images/icon/kaopuchilevel/renzhengC.png" alt=""/ v-if="item.kaopuchilevel=='C'">
+			                    	<img src="/Public/images/icon/kaopuchilevel/renzhengD.png" alt=""/ v-if="item.kaopuchilevel=='D'">
+			                    	<img src="/Public/images/icon/shipin1.png" alt=""/ v-if="item.kaopuchimedia==1">
+			                    	<img src="/Public/images/icon/shipin.png" alt=""/ v-else>
+			                    	<img src="/Public/images/icon/zizhudiancan1.png" alt=""/ v-if="item.zizhudiancan==1">
+			                    	<img src="/Public/images/icon/zizhudiancan.png" alt=""/ v-else>
+			                    	<img src="/Public/images/icon/wiasong1.png" alt=""/ v-if="item.waimaidiancan==1">
+			                    	<img src="/Public/images/icon/wiasong.png" alt=""/ v-else>
+			                    </div>
+			                </div>
+			                <div class="weui-cell__ft"></div>
+			            </div>
+		            </template>
+	            </div>
+	        </div>
+        </div>
+	</body>
+</html>

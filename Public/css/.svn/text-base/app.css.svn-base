@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+[v-cloak] {
+  display: none;
+}
+.weui-form-preview{
+	margin-bottom: 20px;
+}

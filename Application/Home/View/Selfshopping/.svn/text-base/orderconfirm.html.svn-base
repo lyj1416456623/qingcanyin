@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('提交订单')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、提交订单">
+		<include file="Public:script" />
+		<script type="text/javascript">
+			var returnwx = "{$_GET['returnwx']}";
+			var code = "{$_GET['code']}";
+			var appid = "{$_GET['appid']}";
+			var state = "{$_GET['state']}";
+			var storeid = "{$_GET['storeid']}";
+			var activityid = "{$_GET['activityid']}";
+			console.log("活动",activityid,"活动id");
+			var localcode = "{$_GET['localcode']}"?"{$_GET['localcode']}":0;
+			var stid = "{$_GET['stid']}"?"{$_GET['stid']}":"";//桌台id
+			var staid = "{$_GET['staid']}"?"{$_GET['staid']}":"";//区域id
+			console.log(localcode,stid,staid,"提交订单");
+		</script>
+	</head>
+	<body style="background:#f9f9f9">
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<div class="weui-cells" v-if="localcode!=1">
+					<div class="weui-cell">
+		                <div class="weui-cell__bd">
+		                    <p>{{storename}} {:L('距离您')}{{longFormat}}</p>
+		                </div>
+		            </div>
+	            </div>
+				<div class="weui-cells__title" v-if="localcode!=1">{:L('预约时间')}</div>
+				<div class="weui-cells" v-if="localcode!=1">
+		            <a class="weui-cell weui-cell_access" href="javascript:;" id="showPicker" v-on:click="showPicker">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('请选择预约时间')}</p>
+		                </div>
+		                <div class="weui-cell__ft">{{sendTime}}</div>
+		            </a>
+		      	</div>
+		      	<template v-if="!islogin">
+			      	<div class="weui-cells__title">{:L('联系方式(为及时查看您的备餐状态请留下联系方式)')}</div>
+			      	<div class="weui-cells weui-cells_form">
+					    <div class="weui-cell weui-cell_vcode">
+					        <div class="weui-cell__hd">
+					            <label class="weui-label">{:L('手机号')}</label>
+					        </div>
+					        <div class="weui-cell__bd">
+					            <input class="weui-input" type="number" oninput="if(value.length>11)value=value.slice(0,11)" placeholder="{:L('请输入手机号')}" v-model="phone">
+					        </div>
+					        <div class="weui-cell__ft">
+					            <button class="weui-vcode-btn" v-if="countdown" v-on:click="getPhone">{:L('获取验证码')}</button>
+					            <button class="weui-vcode-btn" v-else>{{time}}{:L('秒重新发送')}</button>
+					        </div>
+					    </div>
+					    <div class="weui-cell">
+				            <div class="weui-cell__hd"><label class="weui-label">{:L('验证码')}</label></div>
+				            <div class="weui-cell__bd">
+				                <input class="weui-input" type="number" pattern="[0-9]*" placeholder="{:L('请输入验证码')}" v-model="code">
+				            </div>
+				        </div>
+					</div>
+			    </template>
+		      	<div class="weui-cells__title">{:L('支付方式')}</div>
+		       	<div class="weui-cells weui-cells_radio">
+		       		<template v-for="paytype in pay">
+			            <label class="weui-cell weui-check__label checkbox" :for="paytype.paytype">
+			                <div class="weui-cell__hd">
+			                	<img src="__PUBLIC__/images/icon/yue.png" alt="" style="width:20px;margin-right:5px;display:block" v-if="paytype.paytype=='0'">
+			                	<img src="__PUBLIC__/images/icon/wechat.png" alt="" style="width:20px;margin-right:5px;display:block" v-else>
+			                </div>
+			                <div class="weui-cell__bd">
+			                    <p>{{paytype.payname}}<span style="font-size:.8em;color:#999999" v-if="islogin&&useryue!=null&&paytype.paytype=='0'">{:L('(剩余')}{{useryue}}元)</span></p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                    <input type="radio" class="weui-check" name="radio" :id="paytype.paytype" :data-id="paytype.member" :data-ptid="paytype.ptid" :checked="paytype.checked" v-on:change="setChecked">
+			                    <span class="weui-icon-checked"></span>
+			                </div>
+			            </label>
+		            </template>
+		        </div>
+		        <div class="weui-cells">
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd"><img src="/Public/images/icon/wiasong1.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p style="font-size:.8em;color:#666">{:L('已经购买的商品')}</p>
+		                </div>
+		                <div class="weui-cell__ft"></div>
+		            </div>
+		        </div>
+	    		<div class="weui-cells cart_list_border" style="margin-top:0">
+	            	<div class="goodsCart" v-for="item in goodsList">
+	            		<!--套餐-->
+	            		<div class="goods">
+		            		<div class="weui-cell">
+				                <div class="weui-cell__hd" v-if="item.goodspic!=''"><img :src="item.goodspic" alt="" style="width:20px;height:20px;margin-right:5px;display:block"></div>
+				                <div class="weui-cell__bd" style="width:100%;">
+				                    <p style="max-width:79%;display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;float:left">{{item.goodsname}}</p>
+				                	<span class="pack" v-if="item.dabao=='1'">{:L('打包')}</span>
+				                </div>
+				            </div>
+			            </div>
+			            <div class="cartgood">X{{item.goodsno}}</div>
+			            <div class="goodsprice">￥{{item.priceFormat}}</div>
+			            <!--小项-->
+			            <div class="goodsCart_change">
+			            	<template v-if="item.suitflag!=0" v-for="suit in item.suitflagdata">
+				            	<div class="weui-cell">└ 
+					                <div class="weui-cell__hd" v-if="suit.goodspic!=''">
+					                	<img :src="suit.goodspic" alt="" style="width:10px;margin-right:5px;display:block">
+					                </div>
+					                <div class="weui-cell__bd">
+					                    <p>{{suit.goodsname}} X {{suit.goodsno}} (+{{suit.addprice}}￥)</p>
+					                </div>
+					            </div>
+				            </template>
+				            <div class="weui-cell" v-if="item.remarks.length>0">
+				                <div class="weui-cell__bd" >
+				                    <p>{:L('备注:')}
+				                    	<span v-for="remarks in item.remarks">{{remarks.remarks}} </span>
+				                    </p>
+				                </div>
+				            </div>
+			            </div>
+		           	</div>
+		           	<div class="weui-cell free_fee" v-if="packboxPrice!=0">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('餐盒费')}</p>
+		                </div>
+		                <div class="weui-cell__ft" style="font-size:.8em;color:#000">￥{{packboxPrice}}</div>
+		            </div>
+	          	</div>
+	          	<div class="weui-cells__title">{:L('订单签收成功后，请前往订单详情页领取电子发票')}</div>
+	          	<div class="footer">
+	          		<p>{:L('共￥')}{{totalPrice}}</p>
+	          		<div class="submit" v-on:click="submit">{:L('提交订单')}</div>
+	          	</div>
+			</div>
+		</div>
+	</body>
+</html>

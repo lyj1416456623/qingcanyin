@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('支付成功')}</title>
+		<meta name="keywords" content="芯易科技、轻餐饮、支付提示">
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var orderno = "{$_GET['orderno']}";
+		var storeid = "{$_GET['storeid']}";
+	</script>
+	<body>
+		<div class="container" id="container">
+			<div class="page msg_success js_show">
+				<div class="weui-msg">
+					<div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+					<div class="weui-msg__text-area">
+						<h2 class="weui-msg__title">{:L('支付成功')}</h2>
+						<p class="weui-msg__desc" style="font-size:16px">{:L('请耐心等候，稍后会有配送员为你送餐哦!')}</p>
+					</div>
+					<div class="weui-msg__opr-area">
+						<p class="weui-btn-area">
+							<a :href='"{:U('Myorder/detail')}?type=2&orderno="+orderno' class="weui-btn weui-btn_primary">{:L('查看订单')}</a>
+							<a href="{:U('Index/index')}" class="weui-btn weui-btn_default">{:L('返回首页')}</a>
+						</p>
+					</div>
+					<div class="weui-msg__extra-area">
+						<div class="weui-footer">
+							<p class="weui-footer__links">
+								<a href="javascript:void(0);" class="weui-footer__link">{:L('轻餐饮提供技术支持')}</a>
+							</p>
+							<p class="weui-footer__text">Copyright © 2014-2017 Xinyisoft.cn.io</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

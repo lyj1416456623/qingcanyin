@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('积分兑换')}</title>
+		<meta name="keywords" content="芯易科技、轻餐饮、积分兑换">
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<include file="Public:script" />
+		<script type="text/javascript" src="__PUBLIC__/js/flexslider/jquery.flexslider.js"></script>
+	</head>
+	<body style="background:#f8f8f8">
+		<div id="body" v-cloak>
+			<div class="js_dialog" id="iosDialog2" v-if="errorText">
+			    <div class="weui-mask"></div>
+			    <div class="weui-dialog">
+			        <div class="weui-dialog__bd" style="padding:1.2em 20px .1em">{:L('信息异常')}</div>
+			        <div class="weui-dialog__ft">
+			            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" v-on:click="back">{:L('点击返回')}</a>
+			        </div>
+			    </div>
+			</div>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<!--轮播图-->
+		    	<section class="slider" v-if="pics.length != 0">
+			        <div class="slider-wrapper flexslider">
+			          	<ul class="slides" >
+				            <li v-for="pic in pics" v-bind:style="{ width: len + '%' }">
+				  	    	    <img :src="pic" / >
+				  	    	</li>
+			          	</ul>
+			          	<div class="js-slidernav">
+			          		<li v-for="pic in pics"></li>
+			          	</div>
+			        </div>
+		      	</section>
+		      	<div class="weui-cells" style="margin-top:0">
+			      	<div class="weui-cell">
+			            <div class="weui-cell__bd">
+			                <p>{{content.goodsname}}</p>
+			            </div>
+			            <div class="weui-cell__ft" style="color:#dd7e6b">{:L('需')}{{content.integral}}{:L('积分')}</div>
+			        </div>
+		       	</div>
+		       	<div class="weui-cells__title">{:L('积分兑换详情')}</div>
+		       	<div class="weui-cells">
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd"><img src="__PUBLIC__/images/icon/coin.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p>{:L('兑换内容')}</p>
+		                </div>
+		                <div class="weui-cell__ft" v-if="content.type == 1">{{content.goodsname}}{{content.price}}{:L('元')}</div>
+		                <div class="weui-cell__ft" v-else>{{content.goodsname}}</div>
+		            </div>
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd"><img src="__PUBLIC__/images/icon/readmore.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p>{:L('当前剩余')}</p>
+		                </div>
+		                <div class="weui-cell__ft">{{content.surplus}}份</div>
+		            </div>
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd"><img src="__PUBLIC__/images/icon/changenum.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p>{:L('每人可以兑换')}</p>
+		                </div>
+		                <div class="weui-cell__ft">{{content.uenum}}份</div>
+		            </div>
+		           	<div class="weui-cell">
+		                <div class="weui-cell__hd"><img src="__PUBLIC__/images/icon/number.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p>{:L('您还可以兑换')}</p>
+		                </div>
+		                <div class="weui-cell__ft">{{content.usersurplus}}份</div>
+		            </div>
+		            <div class="weui-cell">
+		                <div class="weui-cell__hd"><img src="__PUBLIC__/images/icon/time1.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p>{:L('活动结束时间')}</p>
+		                </div>
+		                <div class="weui-cell__ft">{{content.endtime}}</div>
+		            </div>
+		            <div class="weui-cell" v-if="type!='2'">
+		                <div class="weui-cell__hd"><img src="__PUBLIC__/images/icon/timeout.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+		                <div class="weui-cell__bd">
+		                    <p>{:L('现金券有效时间')}</p>
+		                </div>
+		                <div class="weui-cell__ft">{{content.goodsendtime}}</div>
+		            </div>
+		        </div>
+		       	<template v-if="type=='2'">
+		       		<div class="weui-cells__title">{:L('礼品寄送地址及联系方式')}</div>
+			       	<div class="weui-cells">
+			       		<div class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <input class="weui-input" type="text" placeholder="请输入姓名" name="name" v-model="name">
+			                </div>
+			            </div>
+			       		<div class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <input class="weui-input" type="number" oninput="if(value.length>11)value=value.slice(0,11)" placeholder="请输入手机号" name="phone" v-model="phone">
+			                </div>
+			            </div>
+			            <div class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <input class="weui-input" type="text" placeholder="请输入详细地址" name="address" v-model="address">
+			                </div>
+			            </div>
+			        </div>
+		        </template>
+		        <div class="weui-cells__title">{:L('兑换说明')}</div>
+		        <div class="weui-cells" style="color:#999;font-size:.8em;">
+			        <div class="weui-cell">
+			            <div class="weui-cell__bd">
+			                <p>{{content.text}}</p>
+			            </div>
+			        </div>
+		       	</div>
+		       	<div class="page__bd page__bd_spacing footer" v-if="content.usersurplus>0">
+		       		<a href="javascript:;" class="weui-btn weui-btn_primary" v-on:click="submit">{:L('立即兑换')}</a>
+		       	</div>
+		       	<div class="page__bd page__bd_spacing footer" v-else>
+		       		<a href="javascript:;" class="weui-btn weui-btn_primary" style="background:#b7b7b7">{:L('已兑换')}</a>
+		       	</div>
+	       	</div>
+       	</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('选择地址')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、选择地址">
+		<include file="Public:script" />
+	</head>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<template v-if="checkAddress && addressList.length>0">
+					<div class="weui-cells__title">{:L('选中的送餐地址')}</div>
+					<div class="weui-cells">
+						<label class="weui-cell weui-cell_access" v-on:click="select(checkAddress)">
+			                <div class="weui-cell__bd">
+			                    <p>{{checkAddress.name}} <span style="font-size:.7em;">{{checkAddress.phone}}</span></p>
+			                    <p style="font-size:.8em;color:#666">{{checkAddress.addressall}}</p>
+			                </div>
+			                <div class="weui-cell__ft"></div>
+			            </label>
+				    </div>
+					<div class="weui-cells__title">{:L('请在列表中选择送餐地址')}</div>
+					<div class="weui-cells">
+						<template v-for="item in addressList">
+							<label class="weui-cell weui-cell_access">
+				                <div class="weui-cell__bd" v-on:click="select(item)">
+				                    <p>{{item.name}} <span style="font-size:.7em;">{{item.phone}}</span></p>
+				                    <p style="font-size:.8em;color:#666">{{item.addressall}}</p>
+				                </div>
+				                <div class="weui-cell__ft"></div>
+				           	</label>
+			            </template>
+			        </div>
+		        </template>
+		        <div class="weui-cells__title" v-else>{:L('送餐地址列表')}</div>
+		        <div class="weui-btn-area" v-on:click="addAddress">
+		            <a class="weui-btn weui-btn_default" href="javascript:" id="showTooltips">{:L('添加新地址')}</a>
+		        </div>
+			</div>
+		</div>
+	</body>
+</html>

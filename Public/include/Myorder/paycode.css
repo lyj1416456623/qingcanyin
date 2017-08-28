@@ -1,0 +1,21 @@
+/*This is Myorder/paycode css file!*/
+.userImg img{
+	width:4em;
+	border:2px solid #fff;
+	margin-right:1em;
+	border-radius:50%;
+}
+.tCode{
+	width:100%;
+	text-align: center;
+	margin-top:1em;
+}
+.tCode img{
+	width:80%;
+}
+.erCode img{
+	width:60%;
+}
+p{
+	text-align: center;
+}

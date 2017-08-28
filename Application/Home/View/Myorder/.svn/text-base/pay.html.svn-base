@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('支付')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、支付">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var orderno = "{$_GET['orderno']}";
+		var type = "{$_GET['type']}"
+	</script>
+	<body style="background:#f9f9f9">
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+		        <template v-if="order.type == 1">
+			        <div class="weui-cells__title">{:L('配送地址')}</div>
+					<div class="weui-cells">
+			            <label class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <p>{{address.name}}  <span >{{address.phone}}</span></p>
+			                    <p style="font-size:.8em;color:#666;margin-top:.5em">{{address.address}}</p>
+			                </div>
+			                <div class="weui-cell__ft"></div>
+			            </label>
+		           	</div>
+	           	</template>
+	           	<div class="weui-cells__title">{:L('支付方式')}</div>
+		       	<div class="weui-cells weui-cells_radio">
+		       		<template>
+			            <label class="weui-cell weui-check__label checkbox">
+			                <div class="weui-cell__hd">
+			                	<img src="/Public/images/icon/yue.png" alt="" style="width:20px;margin-right:5px;display:block">
+			                </div>
+			                <div class="weui-cell__bd">
+			                    <p>余额</p>
+			                </div>
+			                <div class="weui-cell__ft">
+			                    <input type="radio" class="weui-check" name="radio">
+			                    <span class="weui-icon-checked"></span>
+			                </div>
+			            </label>
+		            </template>
+		        </div>
+	           	<div class="weui-cells__title">{:L('购买的商品')}</div>
+		        <div class="weui-cells cart_list_border" style="margin-top:0">
+		        	<template v-for="goods in goods">
+		            	<div class="goodsCart">
+		            		<!--套餐-->
+		            		<div class="goods">
+			            		<div class="weui-cell">
+					                <div class="weui-cell__hd"><img :src="goods.goodsimg" style="width:20px;height:20px;margin-right:5px;display:block"></div>
+					                <div class="weui-cell__bd" style="width:100%;">
+					                    <p style="width: 95%; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{goods.goodsname}}</p>
+					                </div>
+					            </div>
+					            <div class="cartgood">X{{goods.goodsno}}</div>
+				            	<div class="goodsprice">￥{{goods.sprice}}</div>
+				            </div>
+				            <!--小项-->
+				            <div class="goodsCart_change" v-if="goods.suitflag==1||goods.remarks.length>0">
+				            	<template v-if="goods.suitflag==1" v-for="suit in goods.suitflagdata">
+					            	<div class="weui-cell">└&nbsp  
+						                <div class="weui-cell__hd">
+						                	<img :src="suit.goodsimg" style="width:10px;height:10px;margin-right:5px;display:block">
+						                </div>
+						                <div class="weui-cell__bd">
+						                    <p>{{suit.goodsname}} X{{suit.goodsno}} (+{{suit.addprice}}￥)</p>
+						                </div>
+						            </div>
+					            </template>
+					            <div class="weui-cell" v-if="goods.remarks.length>0">
+					                <div class="weui-cell__bd" >
+					                    <p style="font-size:.8em">{:L('备注:')}
+					                    	<span v-for="remarks in goods.remarks">{{remarks}} </span>
+					                    </p>
+					                </div>
+					            </div>
+				            </div>
+			           	</div>
+		           	</template>
+		           	<template v-if="order.type == 1">
+			           	<div class="weui-cell free_fee">
+			                <div class="weui-cell__bd">
+			                    <p>{:L('餐盒费')}</p>
+			                </div>
+			                <div class="weui-cell__ft" style="font-size:.8em;color:#000">￥{{box.sprice}}</div>
+			            </div>
+			            <div class="weui-cell">
+			                <div class="weui-cell__bd">
+			                    <p>{:L('配送费')}</p>
+			                </div>
+			                <div class="weui-cell__ft" style="font-size:.8em;color:#000">￥{{song.sprice}}</div>
+			            </div>
+		            </template>
+		            <div class="weui-cell">
+		                <div class="weui-cell__bd">
+		                    <p>{:L('总价')}</p>
+		                </div>
+		                <div class="weui-cell__ft" style="font-size:.8em;color:#000">{{order.allprice}}{:L('元')}</div>
+		            </div>
+		        </div>
+		        <div class="weui-btn-area">
+		            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">{:L('支付')}</a>
+		        </div>
+          	</div>
+		</div>
+	</body>
+</html>
