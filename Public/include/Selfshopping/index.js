@@ -244,7 +244,8 @@ $(function() {
 					suitflagdata: suitflag, //套餐小项列表
 					addprice: 0,
 					packbox: this.currentGoods.packbox, //打包盒数量
-					dabao:this.switchBox
+					dabao:this.switchBox,
+					sellout:this.currentGoods.sellout //商品售罄
 				};
 				var hash = md5(JSON.stringify(cartData));
 				cartData.hash = hash;
@@ -493,9 +494,10 @@ $(function() {
 					var oldprice = app.goodsdata[typeid][j].price;
 					var goodssuitflag = app.goodsdata[typeid][j].suitflag;
 					var newPackbox = app.goodsdata[typeid][j].packbox;
+					var sellout = app.goodsdata[typeid][j].sellout; //商品售罄
 					app.goodsdata[typeid][j].count = 0;
 					for(var k = 0; k < showCartDataCache.goodsdata.length; k++) {
-						if(goodsid == showCartDataCache.goodsdata[k].goodsid && goodsname == showCartDataCache.goodsdata[k].goodsname && goodssuitflag == showCartDataCache.goodsdata[k].suitflag){
+						if(goodsid == showCartDataCache.goodsdata[k].goodsid && goodsname == showCartDataCache.goodsdata[k].goodsname && goodssuitflag == showCartDataCache.goodsdata[k].suitflag && sellout == showCartDataCache.goodsdata[k].sellout){
 							showCartDataCache.goodsdata[k].price = oldprice;
 							showCartDataCache.goodsdata[k].packbox = newPackbox;
 							if(!showCartDataCache.goodsdata[k].dabao){

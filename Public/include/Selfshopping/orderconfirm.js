@@ -280,7 +280,7 @@ $(function() {
 							},1000);
 							weui.toast('已发送', 3000);
 						}else{
-							weui.topTips('发送失败，请稍后重试', 3000);
+							weui.topTips(result.msg, 3000);
 						}
 					},"json")
 				}
@@ -511,6 +511,16 @@ $(function() {
 		nowsendDate = "今天";
 		nowsendHour = timestartHours;
 		nowsendMinute = timestartMinutes;
+		weui.alert('当前店铺休息中，请稍后再来下单', {
+		    title: '温馨提示',
+		    buttons: [{
+		        label: '确定',
+		        type: 'primary',
+		        onClick: function(){
+		        	window.history.go(-1);
+		        }
+		    }]
+		});
 		console.log("时间",nowsendDate, nowsendHour, nowsendMinute);
 	} else {
 		//预定时间

@@ -1,0 +1,86 @@
+*{padding:0px; margin:0px;}
+/* body start */
+#body{
+	width:100%;
+	margin:0px auto;
+}
+/* body end */
+
+/* container start*/
+.container{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	right:0;
+	buttom:0;
+	left:0;
+	overflow-y:scroll;
+}
+/* container end*/
+
+/* header start 活动背景*/
+.header{
+	width:100%;
+	margin:0px;
+	padding:0px;
+	position:relative;
+}
+.header img{
+	width:100%;
+	height:100%;
+}
+.header p{
+	width:70%;
+	position:absolute;
+	top:75%;
+	left:15%;
+	font-size:1.2em;
+	line-height:1.2em;
+	color:white;
+	text-align:center;
+}
+/* header end */
+
+/* recharge-list start 活动按钮*/
+.recharge-list{
+	width:90%;
+	margin:0px auto;
+	line-height:inherit;
+}
+.recharge-list div.recharge{
+	width:100%;
+	height:100%;
+	margin-top:1em;
+	position:relative;
+}
+.recharge-list div.recharge img{
+	width:100%;
+	height:100%;
+	margin-top:1em;
+	position:relative;
+	margin:0px auto;
+	display:block;
+}
+.recharge-list div.recharge div.text{
+	width:100%;
+	height:100%;
+	line-height:100%;
+	font-size:1.2em;
+	color:#000101;
+	text-align:center;
+	position:absolute;
+	top:52%;
+	left:50%;
+	margin-left:-50%;
+	margin-top:-4%;
+}
+.recharge-list div.recharge div.text span{
+	color:#FF3600;
+	margin:0px 5px;
+}
+.recharge-list div.recharge div.text span:nth-child(2){
+	color:#FF3600;
+	margin:0px 5px;
+}
+/* recharge-list end */

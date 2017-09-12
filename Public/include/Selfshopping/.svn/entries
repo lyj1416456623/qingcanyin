@@ -1,15 +1,15 @@
 10
 
 dir
-9
+290
 svn://47.93.10.169/weisoft/Public/include/Selfshopping
 svn://47.93.10.169
 
 
 
-2017-08-02T09:59:28.506134Z
-8
-qiudt
+2017-09-12T01:41:51.697701Z
+279
+liyujiao
 
 
 
@@ -28,7 +28,7 @@ qiudt
 
 orderconfirm.css
 file
-172
+
 
 
 
@@ -60,43 +60,9 @@ liyujiao
 
 1213
 
-index.js
-file
-200
-
-
-
-2017-08-14T03:48:10.673710Z
-4ba24325ee5ebc9779074d5ee21031c6
-2017-08-14T03:48:45.256128Z
-200
-liyujiao
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-21422
-
 orderlist.js
 file
-191
+
 
 
 
@@ -128,16 +94,16 @@ liyujiao
 
 2775
 
-activity.css
+index.js
 file
-56
 
 
 
-2017-08-03T06:00:40.675934Z
-7e60ba5c2dd0daedbe03f63023fedfdd
-2017-08-03T06:01:14.120250Z
-56
+
+2017-08-29T11:25:49.196325Z
+6f6f6498a71a291e63495a19979fd1fd
+2017-08-29T12:08:52.489395Z
+232
 liyujiao
 
 
@@ -160,7 +126,41 @@ liyujiao
 
 
 
-427
+21600
+
+storeinfo.js
+file
+
+
+
+
+2017-08-04T03:48:15.779752Z
+83a3a3d6a4b50d279441dcf59d607b02
+2017-08-04T03:48:52.267097Z
+76
+liyujiao
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4940
 
 selectstore.css
 file
@@ -196,16 +196,16 @@ qiudt
 
 438
 
-storeinfo.js
+activity.css
 file
-76
 
 
 
-2017-08-04T03:48:15.779752Z
-83a3a3d6a4b50d279441dcf59d607b02
-2017-08-04T03:48:52.267097Z
-76
+
+2017-08-03T06:00:40.675934Z
+7e60ba5c2dd0daedbe03f63023fedfdd
+2017-08-03T06:01:14.120250Z
+56
 liyujiao
 
 
@@ -228,7 +228,7 @@ liyujiao
 
 
 
-4940
+427
 
 orderdetail.css
 file
@@ -298,40 +298,6 @@ qiudt
 
 299
 
-index.css
-file
-195
-
-
-
-2017-08-14T02:30:40.115556Z
-83312777756ea9a7dce7db6ac6b447df
-2017-08-14T02:30:59.394077Z
-195
-liyujiao
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4386
-
 orderlist.css
 file
 
@@ -365,6 +331,40 @@ qiudt
 
 
 44
+
+index.css
+file
+
+
+
+
+2017-08-14T02:30:40.115556Z
+83312777756ea9a7dce7db6ac6b447df
+2017-08-14T02:30:59.394077Z
+195
+liyujiao
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4386
 
 storeinfo.css
 file
@@ -402,14 +402,14 @@ qiudt
 
 orderceshi.js
 file
-182
 
 
 
-2017-08-09T04:29:48.380450Z
-4a077e34d93ac600e34c348836cd9de5
-2017-08-09T04:29:58.893822Z
-182
+
+2017-09-12T01:30:20.824612Z
+a2cf82917d3e3ee459f883774e48b6d1
+2017-09-12T01:33:03.380539Z
+277
 liyujiao
 
 
@@ -432,18 +432,18 @@ liyujiao
 
 
 
-2775
+21605
 
 orderconfirm.js
 file
-204
 
 
 
-2017-08-14T09:20:56.318524Z
-87834a5d43cc64014ae758bfad03d138
-2017-08-14T09:21:16.870495Z
-204
+
+2017-09-07T03:08:01.492926Z
+4c141c04685c062b76d1cfb77b746772
+2017-09-07T03:08:31.221934Z
+265
 liyujiao
 
 
@@ -466,41 +466,7 @@ liyujiao
 
 
 
-23613
-
-activity.js
-file
-116
-
-
-
-2017-08-04T07:29:56.871170Z
-389cc4aacd04735517ee0efa0ebbea6d
-2017-08-04T07:31:02.793218Z
-116
-liyujiao
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3814
+23858
 
 selectstore.js
 file
@@ -535,6 +501,40 @@ qiudt
 
 
 3359
+
+activity.js
+file
+
+
+
+
+2017-08-08T11:34:21.221665Z
+389cc4aacd04735517ee0efa0ebbea6d
+2017-08-04T07:31:02.793218Z
+116
+liyujiao
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3814
 
 orderdetail.js
 file
@@ -603,4 +603,38 @@ qiudt
 
 
 87
+
+orderceshi.css
+file
+
+
+
+
+2017-09-12T01:40:00.863352Z
+b6ebcf3e69092185a6a111c8508ecfe0
+2017-09-12T01:41:51.697701Z
+279
+liyujiao
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4391
 

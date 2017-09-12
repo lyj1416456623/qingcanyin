@@ -295,12 +295,21 @@ $(function() {
 			    }]
 			});
 		}
-		
 	} else if(Number(newtime) < Number(timeStart)) {
 		nowsendTime = "今天" + " " + timeinfo.starttime;
 		nowsendDate = "今天";
 		nowsendHour = timestartHours;
 		nowsendMinute = timestartMinutes;
+		weui.alert('当前店铺休息中，请稍后再来下单哦', {
+		    title: '温馨提示',
+		    buttons: [{
+		        label: '确定',
+		        type: 'primary',
+		        onClick: function(){
+		        	window.history.go(-1);
+		        }
+		    }]
+		});
 	} else {
 		// 配送的默认时间
 		if(nowMinutes + Number(timeinfo.deliverytime) >= 50) {

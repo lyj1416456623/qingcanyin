@@ -122,69 +122,70 @@ class SelfshoppingController extends Controller{
 	 * 测试订单列表
 	 */
 	public function orderceshi(){
-		$urldata = '';
-		if(isset($_GET['storeid'])) $urldata .= "storeid=".$_GET['storeid']."&";
-		if(isset($_GET['stid'])) $urldata .= "stid=".$_GET['stid']."&";
-		if(isset($_GET['staid'])) $urldata .= "staid=".$_GET['staid']."&";
-		if(isset($_GET['localcode'])) $urldata .= "localcode=".$_GET['localcode'];
-		if(!is_login()){
-			if(isset($_GET['code'])){
-				//通过code获取用户信息
-				$params = array(
-						'code' => $_GET['code'],
-				);
-				$ret = getPingtaiApiData("public.weixinuser.getUserinfo",$params);
-			
-				if($ret['code'] == '1'){
-					if(!empty($ret['data']['user']['uid'])){
-						$_SESSION['USERINFO'] = $ret['data']['user'];
-// 						is_login()  == true
-						$params = array(
-								'storeid'=> $_GET['storeid'],
-								'uid' => $_SESSION['USERINFO']['uid'],
-						);
-						$ret = getPingtaiApiData("public.weixindata.getUserOrderConduct",$params);
-						if(!empty($ret['data'])){
-							$this->assign('data',$ret['data']);
-							$this->display();
-						}else{
-							redirect(U('Selfshopping/storeinfo').'?'.$urldata);
-						}
-					}else{
-						//是否有uid
-						/* $_SESSION['WXLOGINKEY'] = $ret['data']['key'];
-						$this->assign('wxkey',$ret['data']['key'])->assign('title','绑定帐号');
-						redirect(U('Selfshopping/storeinfo') */
-						redirect(U('Selfshopping/storeinfo').'?'.$urldata);
-					}
-				}
-			}else{
-				//通过接口生成跳转授权的地址
-				$params = array(
-						//'jumpurl' => 'http://'.$_SERVER['HTTP_HOST'].URL('Selfshopping/orderceshi').'&returnwx=1',
-					'jumpurl' => getFullUrl()."&returnwx=1",
-				);
-				$ret = getPingtaiApiData("public.weixinuser.getJumpUrl",$params);
-				if($ret['code'] == '1'){
-					redirect($ret['data']);
-				}else{
-					redirect(U('Selfshopping/storeinfo').'?'.$urldata);
-				}
-			}
-		}else{
-			$params = array(
-					'storeid'=> $_GET['storeid'],
-					'uid' => $_SESSION['USERINFO']['uid'],
-			);
-			$ret = getPingtaiApiData("public.weixindata.getUserOrderConduct",$params);
-			if(!empty($ret['data'])){
-				$this->assign('data',$ret['data']);
-				$this->display();
-			}else{
-				redirect(U('Selfshopping/storeinfo').'?'.$urldata);
-			}
-		}
-		/* 判断该门店下是否有未完成订单，如果有就显示当前页面，如果没有就指向门店详情页 */
+		$this->display();
+//		$urldata = '';
+//		if(isset($_GET['storeid'])) $urldata .= "storeid=".$_GET['storeid']."&";
+//		if(isset($_GET['stid'])) $urldata .= "stid=".$_GET['stid']."&";
+//		if(isset($_GET['staid'])) $urldata .= "staid=".$_GET['staid']."&";
+//		if(isset($_GET['localcode'])) $urldata .= "localcode=".$_GET['localcode'];
+//		if(!is_login()){
+//			if(isset($_GET['code'])){
+//				//通过code获取用户信息
+//				$params = array(
+//						'code' => $_GET['code'],
+//				);
+//				$ret = getPingtaiApiData("public.weixinuser.getUserinfo",$params);
+//			
+//				if($ret['code'] == '1'){
+//					if(!empty($ret['data']['user']['uid'])){
+//						$_SESSION['USERINFO'] = $ret['data']['user'];
+//// 						is_login()  == true
+//						$params = array(
+//								'storeid'=> $_GET['storeid'],
+//								'uid' => $_SESSION['USERINFO']['uid'],
+//						);
+//						$ret = getPingtaiApiData("public.weixindata.getUserOrderConduct",$params);
+//						if(!empty($ret['data'])){
+//							$this->assign('data',$ret['data']);
+//							$this->display();
+//						}else{
+//							redirect(U('Selfshopping/storeinfo').'?'.$urldata);
+//						}
+//					}else{
+//						//是否有uid
+//						/* $_SESSION['WXLOGINKEY'] = $ret['data']['key'];
+//						$this->assign('wxkey',$ret['data']['key'])->assign('title','绑定帐号');
+//						redirect(U('Selfshopping/storeinfo') */
+//						redirect(U('Selfshopping/storeinfo').'?'.$urldata);
+//					}
+//				}
+//			}else{
+//				//通过接口生成跳转授权的地址
+//				$params = array(
+//						//'jumpurl' => 'http://'.$_SERVER['HTTP_HOST'].URL('Selfshopping/orderceshi').'&returnwx=1',
+//					'jumpurl' => getFullUrl()."&returnwx=1",
+//				);
+//				$ret = getPingtaiApiData("public.weixinuser.getJumpUrl",$params);
+//				if($ret['code'] == '1'){
+//					redirect($ret['data']);
+//				}else{
+//					redirect(U('Selfshopping/storeinfo').'?'.$urldata);
+//				}
+//			}
+//		}else{
+//			$params = array(
+//					'storeid'=> $_GET['storeid'],
+//					'uid' => $_SESSION['USERINFO']['uid'],
+//			);
+//			$ret = getPingtaiApiData("public.weixindata.getUserOrderConduct",$params);
+//			if(!empty($ret['data'])){
+//				$this->assign('data',$ret['data']);
+//				$this->display();
+//			}else{
+//				redirect(U('Selfshopping/storeinfo').'?'.$urldata);
+//			}
+//		}
+//		/* 判断该门店下是否有未完成订单，如果有就显示当前页面，如果没有就指向门店详情页 */
 	}
 	
 }

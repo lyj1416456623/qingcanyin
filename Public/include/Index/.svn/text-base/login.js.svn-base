@@ -42,7 +42,7 @@ $(function(){
 							},1000);
 							weui.toast('已发送', 3000);
 						}else{
-							weui.topTips('发送失败', 3000);
+							weui.topTips(result.msg, 3000);
 						}
 					},"json")
 				}

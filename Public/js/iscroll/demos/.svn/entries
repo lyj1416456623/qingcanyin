@@ -1,7 +1,7 @@
 10
 
 dir
-9
+290
 svn://47.93.10.169/weisoft/Public/js/iscroll/demos
 svn://47.93.10.169
 
@@ -100,34 +100,34 @@ qiudt
 key-bindings
 dir
 
-tap
+zoom
 dir
 
-zoom
+tap
 dir
 
 click
 dir
 
-forms
-dir
-
 event-passthrough
 dir
 
-horizontal
+forms
 dir
 
 simple
 dir
 
+horizontal
+dir
+
 minimap
 dir
 
-2d-scroll
+snap
 dir
 
-snap
+2d-scroll
 dir
 
 parallax

@@ -1,7 +1,7 @@
 10
 
 dir
-9
+290
 svn://47.93.10.169/weisoft/ThinkPHP/Library/Behavior
 svn://47.93.10.169
 
@@ -25,40 +25,6 @@ qiudt
 
 
 936aa95c-360e-4572-8608-cae5379b2afd
-
-ParseTemplateBehavior.class.php
-file
-
-
-
-
-2017-08-02T10:15:05.059137Z
-112f4b11b0f31ed9d6f98a0793e2feeb
-2017-08-02T09:59:28.506134Z
-8
-qiudt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3984
 
 ContentReplaceBehavior.class.php
 file
@@ -93,6 +59,40 @@ qiudt
 
 
 1974
+
+ParseTemplateBehavior.class.php
+file
+
+
+
+
+2017-08-02T10:15:05.059137Z
+112f4b11b0f31ed9d6f98a0793e2feeb
+2017-08-02T09:59:28.506134Z
+8
+qiudt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3984
 
 BuildLiteBehavior.class.php
 file
@@ -264,40 +264,6 @@ qiudt
 
 1559
 
-ShowRuntimeBehavior.class.php
-file
-
-
-
-
-2017-08-02T10:15:05.072146Z
-58d06d5673ef502997dbe3d84c146ac6
-2017-08-02T09:59:28.506134Z
-8
-qiudt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2941
-
 ReadHtmlCacheBehavior.class.php
 file
 
@@ -331,6 +297,40 @@ qiudt
 
 
 5758
+
+ShowRuntimeBehavior.class.php
+file
+
+
+
+
+2017-08-02T10:15:05.072146Z
+58d06d5673ef502997dbe3d84c146ac6
+2017-08-02T09:59:28.506134Z
+8
+qiudt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2941
 
 CronRunBehavior.class.php
 file
@@ -400,40 +400,6 @@ qiudt
 
 5438
 
-ChromeShowPageTraceBehavior.class.php
-file
-
-
-
-
-2017-08-02T10:15:05.077149Z
-c0b8c59b185b3e5f73e189598c1361af
-2017-08-02T09:59:28.506134Z
-8
-qiudt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-18051
-
 CheckActionRouteBehavior.class.php
 file
 
@@ -468,14 +434,14 @@ qiudt
 
 8546
 
-ShowPageTraceBehavior.class.php
+ChromeShowPageTraceBehavior.class.php
 file
 
 
 
 
-2017-08-02T10:15:05.079651Z
-ca6bdbf031fa1f5f761eff0ef40f774e
+2017-08-02T10:15:05.077149Z
+c0b8c59b185b3e5f73e189598c1361af
 2017-08-02T09:59:28.506134Z
 8
 qiudt
@@ -500,7 +466,7 @@ qiudt
 
 
 
-5394
+18051
 
 AgentCheckBehavior.class.php
 file
@@ -535,6 +501,40 @@ qiudt
 
 
 1082
+
+ShowPageTraceBehavior.class.php
+file
+
+
+
+
+2017-08-02T10:15:05.079651Z
+ca6bdbf031fa1f5f761eff0ef40f774e
+2017-08-02T09:59:28.506134Z
+8
+qiudt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5394
 
 TokenBuildBehavior.class.php
 file

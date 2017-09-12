@@ -1,7 +1,7 @@
 /*This is Myorder/invoive js file!*/
 $(function() {
 var myreg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-var phoneReg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+var phoneReg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(14[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
 var money = Number(effective).toFixed(2);
 var app = new Vue({
 		el: "#body",

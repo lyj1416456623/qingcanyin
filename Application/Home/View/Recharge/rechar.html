@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>{:L('充值活动')}</title>
+		<meta name="description" content="从一开始我们就专注大型连锁快餐行业信息、芯易科技">
+		<meta name="keywords" content="芯易科技、轻餐饮、充值">
+		<include file="Public:script" />
+	</head>
+	<script type="text/javascript">
+		var activityid = "{$_GET['activityid']}";
+	</script>
+	<body>
+		<div id="body" v-cloak>
+			<div class="weui-loadmore"  v-if="loading">
+				<i class="weui-loading"></i> <span class="weui-loadmore__tips">{:L('正在加载...')}</span>
+			</div>
+			<div class="container" v-else>
+				<div class="header">
+					<img src="__PUBLIC__/images/icon/chongzhi.png" />
+					<p>{{title}}</p>
+				</div>
+				<div class="recharge-list">
+					<template v-for="item in List">
+						<div class="recharge" v-on:click="openpay(item)">
+							<img src="__PUBLIC__/images/icon/radius.png" />
+							<div class="text">
+								{:L('充')}
+								<span>{{item.recharge}}</span>
+								{:L('赠')}
+								<span>{{item.zeng}}</span>
+								<template v-if="item.atype==1">{:L('积分')}</template>
+								<template v-if="item.atype==2">{:L('成长值')}</template>
+								<template v-if="item.atype==3">{:L('现金劵')}</template>
+							</div>
+						</div>
+					</template>
+				</div>
+			</div>			
+		</div>
+	</body>
+</html>

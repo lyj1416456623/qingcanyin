@@ -69,6 +69,48 @@ class DatainfoController extends Controller{
 	}
 	
 	/**
+	 * 获取进行中的活动
+	 */
+	public function getActivitting(){
+		$model = new \Common\Model\ActivityModel();
+		msg($model->getActivitting());
+	}
+	
+	/**
+	 * 获取活动规则
+	 */
+	public function getRuleList(){
+		$model = new \Common\Model\ActivityModel();
+		msg($model->getRuleList());
+	}	
+	
+	
+	/**
+	 * 会员充值活动
+	 */
+	public function setJsPayOrder(){
+		$model = new \Common\Model\ActivityModel();
+		msg($model->setActivityJsPayOrder());
+	}
+	
+	/**
+	 * 优惠劵，首单立减，是否已经领过
+	 * return array()
+	 * */
+	public function getCouponData(){
+		$model = new \Common\Model\ActivityModel();
+		msg($model->getCouponData());
+	}
+	
+	/**
+	 * 活动中的微信支付
+	 */
+	public function acitivityWxPay(){
+		$model = new \Common\Model\ActivityModel();
+		msg($model->setActivityJsPayOrder());
+	}
+	
+	/**
 	 * 根据关键词搜索可以配送的地址
 	 */
 	public function searchAddress() {

@@ -179,11 +179,11 @@ class GoodsModel{
 			$params = array(
 					'storeid'=>$_POST['storeid'],
 			);
-			$ret = getPingtaiApiData("public.weixindata.getZizhuStoreConfig",$params);
-			if($ret['code']==1 && !empty($ret['data']) ){
-				$zizuConfig = $ret['data'];
+			$zscret = getPingtaiApiData("public.weixindata.getZizhuStoreConfig",$params);
+			if(!empty($zscret)&&$zscret['code']==1 && !empty($zscret['data']) ){
+				$zizuConfig = $zscret['data'];
 				/* 保存数据 */
-				S(WXAPPID."_Zizhu_StoreConfig".$_POST['storeid'],$ret['data']) ;
+				S(WXAPPID."_Zizhu_StoreConfig".$_POST['storeid'],$zscret['data']) ;
 			}else{
 				return array (
 						'msg' => "成功！",
@@ -279,7 +279,6 @@ class GoodsModel{
 		$zizhutype = json_decode($zizhutype,true);
 		/*自助商品 */
 		$zizhuGoods = S(WXAPPID."_Zizhu_GoodsData".$storeid);
-//		$zizhuGoods = array();
 		if(empty($zizhuGoods)){
 			$params = array(
 					'storeid'=>$storeid,
@@ -296,6 +295,32 @@ class GoodsModel{
 		/* 拼数据 */
 		foreach($zizhutype as $k => $type){
 			if(empty($zizhuGoods[$type['typeid']])) unset($zizhutype[$k]);
+		}
+		/* 获取商品售罄信息 */
+		if(!empty($zizhuGoods)){
+			$params = array('storeid' => $_POST['storeid']);
+			$gcret = getPingtaiApiData("public.weixindata.getGoodsClear",$params);
+			if($gcret['code'] == 1 && !empty($gcret['data']))
+			$goodsClear = $gcret['data'];
+		}
+		foreach($zizhutype as $k => $type){
+			if(empty($zizhuGoods[$type['typeid']])){
+				unset($zizhutype[$k]);
+				continue;
+			}
+			/* 验证售罄商品 */
+			foreach ($zizhuGoods[$type['typeid']] as  &$zgv){
+				$zgv['sellout'] = false;
+				if(empty($goodsClear)) continue;
+				foreach($goodsClear as $cgv){
+					if($zgv['goodsid'] != $cgv['goodsid']) continue;
+					$time = time();
+					if($cgv['stime']<$time && $cgv['ttime']> $time)
+					$zgv['sellout'] = true;
+					$zgv['sellouttime'] = $cgv['goodsid'].'-'.$cgv['stime'].'-'.$cgv['ttime'];
+					$zgv['selloutdata'] = $cgv;
+				}
+			}
 		}
 		$zizhutype = array_values($zizhutype);
 		$data["goods"] = $zizhuGoods;
@@ -332,7 +357,7 @@ class GoodsModel{
 		return array (
 				'msg' => "成功！",
 				'data' => $data,
-				'success' => true,
+				'success' => true
 		);  
 	}
 	/**

@@ -3,7 +3,7 @@ $(function(){
 	var app;
 	var len;
 	var id=window.location.search.replace(/[^0-9]/ig, "");
-	var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+	var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(14[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
   	app = new Vue({
 		el : '#body',
 		data : {

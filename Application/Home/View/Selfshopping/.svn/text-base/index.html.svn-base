@@ -183,11 +183,12 @@
 							                    <p style="font-size: 13px;color: #888888;">{{list.info}}</p>
 							                    <p style="font-size: 13px;color: #888888;">{:L('月售')}{{list.sales}}</p>
 							                    <p style="color:#ff0000">￥{{list.price}}</p>
-							                    <div class="goods">
+							                    <div class="goods" v-if="!list.sellout">
 							                    	<!--<img src="/Public/images/icon/remove.png" alt="" class="minus" v-if="list.count>0 && list.suitflag!=1 && list.remarks.length==0" v-on:click="minusCart(list)"/>-->
 							                    	<span v-if="list.count>0">{{list.count}}</span>
 							                    	<img src="/Public/images/icon/plus.png" alt="" class="add" v-on:click="addCart(list,index,item.typeid)"/>
 							                    </div>
+							                    <div class="goods" v-else><font style="font-size:0.8em; color:#ccc;">{:L('已售罄')}</font></div>
 							                </div>
 							            </div>
 							        </div>
@@ -203,11 +204,12 @@
 							                    <p style="font-size: 13px;color: #888888;">{{list.info}}</p>
 							                    <p style="font-size: 13px;color: #888888;">{:L('月售')}{{list.sales}}</p>
 							                    <p style="color:#ff0000">￥{{list.price}}</p>
-							                    <div class="goods">
+							                    <div class="goods" v-if="!list.sellout">
 							                    	<!--<img src="/Public/images/icon/remove.png" alt="" class="minus" v-if="list.count>0 && list.suitflag!=1 && list.remarks.length==0" v-on:click="minusCart(list)"/>-->
 							                    	<span v-if="list.count>0">{{list.count}}</span>
 							                    	<img src="/Public/images/icon/plus.png" alt="" class="add" v-on:click="addCart(list,index,item.typeid)"/>
 							                    </div>
+							                    <div class="goods" v-else><font style="font-size:0.8em; color:#ccc;">{:L('已售罄')}</font></div>
 							                </div>
 							            </div>
 							        </div>
@@ -234,7 +236,7 @@
 				            	<div class="goodsCart" style="width:100%;" v-for="cartItem in cartGoodsData">
 				            		<!--套餐-->
 				            		<div class="weui-cell">
-						                <div class="weui-cell__hd" v-if="cartItem.goodspic!=''"><img :src="cartItem.goodspic" alt="" style="width:20px;margin-right:5px;display:block"></div>
+						                <div class="weui-cell__hd" v-if="cartItem.goodspic!=''"><img :src="cartItem.goodspic" alt="" style="width:20px;height:20px;margin-right:5px;display:block"></div>
 						                <div class="weui-cell__bd">
 						                    <template v-if="cartItem.suitflag!=1" ><p class="cart-title">{{cartItem.goodsname}} {{cartItem.priceFormat}}</p><span class="pack" v-if="cartItem.dabao=='1'">{:L('打包')}</span></template>
 						                    <template v-else><p class="cart-title">{{cartItem.goodsname}} {{cartItem.priceFormat}} (含加价)</p><span class="pack" v-if="cartItem.dabao=='1'">{:L('打包')}</span></template>

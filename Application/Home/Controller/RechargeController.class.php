@@ -14,4 +14,10 @@ class RechargeController extends Controller{
 	public function index(){
 		$this->display();
 	}
+	/**
+	 * 充值活动
+	 */
+	public function rechar(){
+		$this->display();
+	}
 }
